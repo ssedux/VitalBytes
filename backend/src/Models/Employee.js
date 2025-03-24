@@ -8,12 +8,14 @@ const employeeSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        maxLength : 50
     },
     username: {
         type: String,
         required: true,
         unique: true
+        ,maxLength : 20
     },
     password: {
         type: String,
@@ -25,7 +27,7 @@ const employeeSchema = new Schema({
     },
     number: {
         type: Number,
-        required: true
+        required: true,maxLength : 8,minLength:8
     },
     role: {
         type: String,
