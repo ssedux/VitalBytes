@@ -24,5 +24,5 @@ connection.on("disconnected", () => {
 
 // Veo si hay un error
 connection.on("error", (error) => {
-  console.log("error found" + error);
+  console.log("Error found" + error);
 });

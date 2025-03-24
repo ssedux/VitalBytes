@@ -1,6 +1,6 @@
 const ProductosControlador = {};
 
-import ProductosModel from "../Models/ProductosModel";
+import ProductosModel from "../Models/ProductsModel";
 
 // SELECT
 ProductosControlador.getProductos = async (req, res) => {

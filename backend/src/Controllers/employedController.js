@@ -1,6 +1,6 @@
 const EmpleadosControlador = {};
 
-import EmpleadosModel from "../Models/EmpleadosModel";
+import EmpleadosModel from "../Models/EmployedModel";
 
 // SELECT
 EmpleadosControlador.getEmpleados = async (req, res) => {
