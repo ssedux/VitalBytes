@@ -1,7 +1,7 @@
 // array de funciones
 // del CRUD
 const cartController = {};
-import cartModel from "../models/CartModel.js";
+import cartModel from "../Models/CartModel.js";
 
 //select
 cartController.getCart = async (req, res) => {
@@ -11,8 +11,8 @@ cartController.getCart = async (req, res) => {
 
 //insert
 cartController.insertCart = async (req, res) => {
-  const { iduser,idProduct,total,paymentMethod,direction,status } = req.body;
-  const newCart = new cartModel({ iduser,idProduct,total,paymentMethod,direction,status });
+  const { idClient,idProduct,total,paymentMethod,direction,status } = req.body;
+  const newCart = new cartModel({ idClient,idProduct,total,paymentMethod,direction,status });
   await newCart.save();
   res.json({ message: "cart saved" });
 }
@@ -25,8 +25,8 @@ cartController.deleteCart = async (req, res) => {
 
 //update
 cartController.updateCart = async (req, res) => {
-  const { iduser,idProduct,total,paymentMethod,direction,status } = req.body;
-  await cartModel.findByIdAndUpdate(req.params.id, { iduser,idProduct,total,paymentMethod,direction,status },{new:true});
+  const { idClient,idProduct,total,paymentMethod,direction,status } = req.body;
+  await cartModel.findByIdAndUpdate(req.params.id, { idClient,idProduct,total,paymentMethod,direction,status },{new:true});
   res.json({ message: "cart updated" });
 }
 

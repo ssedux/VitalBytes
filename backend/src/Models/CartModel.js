@@ -1,5 +1,5 @@
 /*campos:
--iduser
+-idClient
 -idProduct
 -total
 -paymentMethod
@@ -11,9 +11,9 @@ import { Schema, model } from "mongoose";
 
 const cartSchema = new Schema(
   {
-  iduser: {
+  idClient: {
     type: Schema.Types.ObjectId,
-    ref: "user",
+    ref: "client",
     required: true,
   },
   idProduct: {
