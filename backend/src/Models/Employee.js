@@ -33,9 +33,13 @@ const employeeSchema = new Schema({
         type: String,
         required: true
     },
+    direction: {
+        type: String,
+        required: true
+    },
 }, {
     timestamps: true, 
     strict: false
 });
 
-export default model("Employee", employeeSchema);
+export default model("employee", employeeSchema);

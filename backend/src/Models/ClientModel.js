@@ -1,14 +1,15 @@
+
 import { Schema, model } from "mongoose";
 
-const ClientesSchema = new Schema(
+const ClientSchema = new Schema(
   {
-    NombreCompleto: {
+    fullname: {
       type: String,
       required: true,
       minlength: 3,
-      maxlength: 50,
+      maxlength: 100,
     },
-    Correo: {
+    email: {
       type: String,
       required: true,
       minlength: 10,
@@ -20,23 +21,37 @@ const ClientesSchema = new Schema(
         message: props => `${props.value} no es un correo válido. Debe contener '@'.`
       }
     },
-    Usuario: {
+    username: {
         type: String,
         required: true,
         minlength: 3,
         maxlength: 15,
 
     },
-    Contrasena:{
+    password:{
         type: String,
         required: true,
         minlength: 8,
-    }
-  },
-  {
+    },
+    birth:{
+        type: Date,
+        required: true,
+        validate: {
+          validator: function(v) {
+            return v instanceof Date; 
+          },
+          message: props => `${props.value} no es una fecha válida.`
+        }
+    },
+    
+    number:{
+      type: string,
+      required: true
+    }},
+{
     timestamps: true,
     strict: false,
   }
 );
 
-export default model("Clientes", ClientesSchema);
+export default model("client", ClientSchema);

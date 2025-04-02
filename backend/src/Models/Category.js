@@ -3,7 +3,7 @@ import {Schema , model} from "mongoose";
 
 const categoryShema = new Schema({
 
-    name : {type:String, require : true ,maxLength : 20,minLength : 5}
+    name : {type:String, require : true,minLength : 5}
 },
 {
     timestamps:true,

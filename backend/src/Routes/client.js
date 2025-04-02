@@ -1,16 +1,16 @@
 import express from "express";
-import ClientesControlador from "../Controllers/ClientesControlador";
+import ClientController from "../Controllers/clientController.js";
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(ClientesControlador.getClientes)
-  .post(ClientesControlador.insertClientes);
+  .get(ClientController.getClient)
+  .post(ClientController.insertClient);
 
 router
   .route("/:id")
-  .put(ClientesControlador.updateClientes)
-  .delete(ClientesControlador.deleteClientes);
+  .put(ClientController.updateClient)
+  .delete(ClientController.deleteClient);
 
 export default router;

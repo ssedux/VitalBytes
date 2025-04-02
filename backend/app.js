@@ -12,6 +12,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cookieParse());
+
 app.use("/api/products",productsRoutes)
 app.use("/api/employee",employeeRoutes)
 app.use("/api/category",categoryRoutes)

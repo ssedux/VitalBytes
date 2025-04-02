@@ -1,0 +1,4 @@
+/*campos:
+-idclient
+-idcart
+*/

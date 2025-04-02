@@ -1,44 +1,36 @@
-const ClientesControlador = {};
+const clientController = {};
 
-import ClientesModel from "../Models/ClientModel";
+import clientModel from "../Models/ClientModel.js";
 
 // SELECT
-ClientesControlador.getClientes = async (req, res) => {
-  const clientes = await ClientesModel.find();
-  res.json(clientes);
+clientController.getClient = async (req, res) => {
+  const client = await clientModel.find();
+  res.json(client);
 };
 
 // INSERT
-ClientesControlador.insertClientes = async (req, res) => {
-  const { NombreCompleto, Correo, Usuario, Contrasena } = req.body;
-  const newCliente = new ClientesModel({
-    NombreCompleto,
-    Correo,
-    Usuario,
-    Contrasena
-  });
+clientController.insertClient = async (req, res) => {
+  const { fullname, email, username, password,birth,number } = req.body;
+  const newClient = new ClientModel({fullname, email, username, password,birth,number});
 
-  await newCliente.save();
-  res.json({ message: "Cliente agregado correctamente", cliente: newCliente });
-};
-
-// UPDATE
-ClientesControlador.updateClientes = async (req, res) => {
-  const { NombreCompleto, Correo, Usuario, Contrasena } = req.body;
-
-  const updatedCliente = await ClientesModel.findByIdAndUpdate(
-    req.params.id,
-    { NombreCompleto, Correo, Usuario, Contrasena },
-    { new: true }
-  );
-
-  res.json({ message: "Cliente actualizado correctamente", cliente: updatedCliente });
+  await newClient.save();
+  res.json({ message: "Client saved" });
 };
 
 // DELETE
-ClientesControlador.deleteClientes = async (req, res) => {
-  await ClientesModel.findByIdAndDelete(req.params.id);
-  res.json({ message: "Cliente eliminado correctamente" });
-};
 
-export default ClientesControlador;
+clientController.deleteClient = async (req, res) => {
+  await clientModel.findByIdAndDelete(req.params.id);
+  res.json({ message: "Client deleted" });
+}
+
+// UPDATE
+clientController.updateClient = async (req, res) => {
+  const { fullname, email, username, password,birth,number } = req.body;
+  await clientModel.findByIdAndUpdate(req.params.id,{ fullname, email, username, password,birth,number},
+    { new: true }
+  );
+  res.json({ message: "Client updated" });
+}
+
+export default clientController;

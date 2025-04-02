@@ -9,8 +9,8 @@ productsController.getProducts = async (req, res) => {
 };
 
 productsController.insertProduct = async (req, res) => {
-    const { name, idCategory, price, available, description } = req.body;
-    const newProduct = new Product({ name, idCategory, price, available, description });
+    const { name, idCategory, price, status, description } = req.body;
+    const newProduct = new Product({ name, idCategory, price, status, description });
 
     await newProduct.save();
     res.json({ message: "Product saved" });
@@ -22,10 +22,10 @@ productsController.deleteProduct = async (req, res) => {
 };
                      
 productsController.updateProduct = async (req, res) => {
-    const { name, idCategory, price, available, description } = req.body;
+    const { name, idCategory, price, status, description } = req.body;
     await Product.findByIdAndUpdate(
         req.params.id,
-        { name, idCategory, price, available, description },
+        { name, idCategory, price, status, description },
         { new: true }
     );
     res.json({ message: "Product updated" });

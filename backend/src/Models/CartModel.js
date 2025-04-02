@@ -1,21 +1,49 @@
+/*campos:
+-iduser
+-idProduct
+-total
+-paymentMethod
+-direction
+-status
+ */
+
 import { Schema, model } from "mongoose";
 
-const PagoSchema = new Schema(
+const cartSchema = new Schema(
   {
-    Total: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    Pago: {
-        type: String,
-        required: true
-    }
+  iduser: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
   },
+  idProduct: {
+    type: Schema.Types.ObjectId,
+    ref: "product",
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+  direction: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["pending", "completed"],
+    default: "pending",
+  } 
+
+},
   {
     timestamps: true,
     strict: false,
   }
 );
 
-export default model("Pago", PagoSchema);
+export default model("cart", CartSchema);
