@@ -1,4 +1,4 @@
-const logoutController={};
+ const logoutController={};
 
 logoutController.logout = (req, res) => {
 res.clearCookie("authToken");
