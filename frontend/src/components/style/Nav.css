@@ -1,3 +1,19 @@
+.userinfo{
+    display: flex; /* Alinea los elementos horizontalmente */
+    align-items:center; /* Centra los elementos verticalmente */
+    gap: 10px; 
+}
+.userinfo h2{
+    font-size: 18px; /* Tamaño del texto */
+    color: #914F1E; /* Color del texto */
+    font-weight: bold; /* Negrita para el texto */
+    margin: 0; 
+}
+.userinfo i{
+ width: 60px;
+ border-radius: 50%;
+ margin-right: 15px;
+}
 .linea-vertical {
     width: 2px; /* Ancho de la línea */
     height: 40px; /* Altura de la línea */
@@ -10,22 +26,24 @@
     cursor: pointer; /* Cambia  el cursor al pasar sobre la sección */
     z-index: 10; /* Asegura que este div esté encima de otros elementos */
     padding: 10px 15px; /* Espaciado interno */
-    width: 500px; /* Ancho completo */
+    width: 320px; /* Ancho completo */
 }
 
-
+.cart-icon {
+    margin: 10px; /* Mueve el ícono más a la izquierda */
+    margin-right: 20px; /* Espaciado entre el ícono y el texto */
+    font-size: 24px; /* Ajusta el tamaño del ícono si es necesario */
+    color: #914F1E; /* Color del ícono */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    transition: transform 0.3s ease, color 0.3s ease; /* Animación para hover */
+}
 
 .MiPerfil .user-pic {
     font-size: 24px; /* Tamaño del ícono */
     color: #914F1E; /* Color del ícono */
     margin-right: 5px; /* Espaciado entre el ícono y el texto */
 }
-.user-pic{
-    width: 40px;
-    border-radius: 50%;
-    
 
-}
 h1{
     color: #914F1E; /* Color del texto */
     font-size: 24px; /* Tamaño de la fuente */
@@ -59,3 +77,22 @@ nav ul li a{
     width: 80px; /* Ajusta el ancho según sea necesario */
     height: auto; /* Mantiene la proporción de la imagen */
 }
+
+.submenu{
+    position: absolute; /* Posiciona el submenu relativo al elemento padre */
+    top: 100%; /* Coloca el submenu justo debajo del elemento padre */
+    right: 10%; /* Alinea el submenu a la izquierda */
+    width: 320px;
+    color: #914F1E;
+}
+.bloque hr{
+    border: 0; /* Elimina el borde por defecto */
+    height: 1px; /* Altura de la línea */
+    background-color: #914F1E; /* Color de la línea */
+}
+.bloque{
+    background: #fff;
+    padding: 20px; /* Espaciado interno */
+    margin: 10px;
+}
+

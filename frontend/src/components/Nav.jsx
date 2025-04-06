@@ -28,11 +28,22 @@ const Nav = () => {
                 </ul>
                 <div className="MiPerfil">
                 <i class="fa-solid fa-circle-user user-pic"></i>
-                <label htmlFor="">Mi perfil</label>
+                <label  htmlFor="">Mi perfil</label>
                 <i class="fa-solid fa-chevron-right"></i>
                 </div>
                 <div className="linea-vertical"></div>
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-cart-shopping cart-icon"></i>
+
+                <div className="submenu">
+                    <div className="bloque">
+                        <div className="userinfo">
+                        <i class="fa-solid fa-circle-user user-pic"></i>
+                        <h2>Mi perfil</h2>
+                        </div> 
+                    </div>
+                    <hr />
+                    
+                </div>
         </nav>
         </div>
     );
