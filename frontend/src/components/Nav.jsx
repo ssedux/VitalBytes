@@ -8,7 +8,7 @@ const Nav = () => {
     <div className="div">
         <nav>
             <img src={logo} className="logo" alt="Vital Bytes Logo" />
-            <h1 className="text-2xl font-bold text-gray-800">Vital Bytes</h1>
+            <h1 className="titulo">Vital Bytes</h1>
                 <ul className="flex space-x-4">
                     <li>
                         <a href="/Inicio">
