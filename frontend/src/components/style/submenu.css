@@ -1,0 +1,77 @@
+hr{
+    border: 0; /* Elimina el borde por defecto */
+    height: 1px; /* Altura de la línea */
+    background-color: #914F1E; /* Color de la línea */
+    margin: 15px 0 10px; /* Elimina el margen por defecto */
+    width: 100%; /* Ancho completo */
+
+}
+
+
+.userinfo{
+    display: flex; /* Alinea los elementos horizontalmente */
+    align-items:center; /* Centra los elementos verticalmente */
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    margin-top: 20px;
+}
+.userinfo:hover{
+    color: #914F1E; /* Color del texto al pasar el mouse */
+    transform: translateX(5px); /* Desplaza el texto ligeramente a la derecha */
+    transition: transform 0.3s ease, color 0.3s ease; /* Animación para hover */
+}
+.userinfo h2{
+    font-size: 18px; /* Tamaño del texto */
+    color: #914F1E; /* Color del texto */
+    font-weight: bold; /* Negrita para el texto */
+    margin: 0; 
+    text-align: left;
+}
+.userinfo i{
+ width: 60px;
+ border-radius: 50%;
+ margin-right: 15px;
+}
+
+
+.submenu{
+    position: absolute; /* Posiciona el submenu relativo al elemento padre */
+    top: 100%; /* Coloca el submenu justo debajo del elemento padre */
+    right: 5%; /* Alinea el submenu a la izquierda */
+    color: #914F1E;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.3s ease; /* Animación para la apertura del submenu */
+}
+.submenu.active{
+    max-height: 400px; /* Altura máxima del submenu */
+    transition: max-height 0.3s ease; /* Animación para la apertura del submenu */
+}
+
+.bloque{
+    background: #fff;
+    padding: 1px 20px 1px; /* Espaciado interno */
+
+    margin: 10px;
+    
+}
+.submenu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #914F1E;
+    margin: 12px 0; /* Espaciado entre los enlaces */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.submenu-link p{
+width: 100%;
+
+}
+.submenu-link i{
+    margin-right: 15px;
+}
+.submenu-link:hover{
+    color: #914F1E; /* Color del texto al pasar el mouse */
+    transform: translateX(5px);
+    transition: transform 0.3s ease, color 0.3s ease;
+}

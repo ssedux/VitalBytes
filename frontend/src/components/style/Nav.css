@@ -1,19 +1,19 @@
-.userinfo{
+.MiPerfil {
+    position: relative; /* Permite posicionar elementos hijos en relación a este contenedor */
+    cursor: pointer; /* Cambia  el cursor al pasar sobre la sección */
+    z-index: 10; /* Asegura que este div esté encima de otros elementos */
+    padding: 10px 10px; /* Espaciado interno */
+    width: 300px; /* Ancho completo */
     display: flex; /* Alinea los elementos horizontalmente */
-    align-items:center; /* Centra los elementos verticalmente */
-    gap: 10px; 
 }
-.userinfo h2{
-    font-size: 18px; /* Tamaño del texto */
-    color: #914F1E; /* Color del texto */
-    font-weight: bold; /* Negrita para el texto */
-    margin: 0; 
+.MiPerfil a{
+    color : #914F1E; /* Color del texto */
+    margin-top: 4px; /* Espaciado entre el ícono y el texto */
 }
-.userinfo i{
- width: 60px;
- border-radius: 50%;
- margin-right: 15px;
+.MiPerfil i{
+    margin-top: px;
 }
+
 .linea-vertical {
     width: 2px; /* Ancho de la línea */
     height: 40px; /* Altura de la línea */
@@ -21,25 +21,16 @@
     margin: 0 20px; /* Espaciado horizontal */
     display: inline-block; /* Asegura que se comporte como un elemento en línea */
 }
-.MiPerfil {
-    position: relative; /* Permite posicionar elementos hijos en relación a este contenedor */
-    cursor: pointer; /* Cambia  el cursor al pasar sobre la sección */
-    z-index: 10; /* Asegura que este div esté encima de otros elementos */
-    padding: 10px 15px; /* Espaciado interno */
-    width: 320px; /* Ancho completo */
-}
 
 .cart-icon {
     margin: 10px; /* Mueve el ícono más a la izquierda */
     margin-right: 20px; /* Espaciado entre el ícono y el texto */
-    font-size: 24px; /* Ajusta el tamaño del ícono si es necesario */
     color: #914F1E; /* Color del ícono */
     cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
     transition: transform 0.3s ease, color 0.3s ease; /* Animación para hover */
 }
 
 .MiPerfil .user-pic {
-    font-size: 24px; /* Tamaño del ícono */
     color: #914F1E; /* Color del ícono */
     margin-right: 5px; /* Espaciado entre el ícono y el texto */
 }
@@ -78,21 +69,10 @@ nav ul li a{
     height: auto; /* Mantiene la proporción de la imagen */
 }
 
-.submenu{
-    position: absolute; /* Posiciona el submenu relativo al elemento padre */
-    top: 100%; /* Coloca el submenu justo debajo del elemento padre */
-    right: 10%; /* Alinea el submenu a la izquierda */
-    width: 320px;
-    color: #914F1E;
-}
-.bloque hr{
-    border: 0; /* Elimina el borde por defecto */
-    height: 1px; /* Altura de la línea */
-    background-color: #914F1E; /* Color de la línea */
-}
-.bloque{
-    background: #fff;
-    padding: 20px; /* Espaciado interno */
-    margin: 10px;
-}
 
+.arrow-right{
+    color: #914F1E; /* Color del ícono */
+    font-size: 20px; /* Tamaño del ícono */
+    transition: transform 0.3s ease; /* Animación para hover */
+    margin-left: 10px;
+}
