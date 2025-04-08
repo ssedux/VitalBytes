@@ -9,6 +9,7 @@
 .MiPerfil a{
     color : #914F1E; /* Color del texto */
     margin-top: 4px; /* Espaciado entre el ícono y el texto */
+    text-decoration: none
 }
 .MiPerfil i{
     margin-top: px;
@@ -75,4 +76,9 @@ nav ul li a{
     font-size: 20px; /* Tamaño del ícono */
     transition: transform 0.3s ease; /* Animación para hover */
     margin-left: 10px;
+}
+
+.arrow-right.active {
+    transition: transform 0.3s ease; /* Animación suave */
+    transform: rotate(90deg); /* Rota el ícono 90 grados */
 }

@@ -1,10 +1,11 @@
-
-    import React from 'react';
+import React from 'react';
 import './style/Submenu.css';
 
 const Submenu1 = () => {
+    
+
     return (
-    <div className="submenu" id="submenu1">
+   
     <div className="bloque">
         <a href="" class="submenu-link">
             <i class="fa-solid fa-right-to-bracket"></i>
@@ -18,7 +19,7 @@ const Submenu1 = () => {
             <i class="fa-solid fa-chevron-right arrow-right"></i>
         </a>
     </div>
-</div>
+
   );
 };
 

@@ -48,6 +48,7 @@ hr{
     transition: max-height 0.3s ease; /* Animación para la apertura del submenu */
 }
 
+
 .bloque{
     background: #fff;
     padding: 1px 20px 1px; /* Espaciado interno */
