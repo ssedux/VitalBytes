@@ -5,7 +5,7 @@ const SubmenuLog = () => {
     return (
     <div className="submenu" id="submenuLog">
     <div className="bloque">
-        <div href="#"className="userinfo">
+        <div href="/Perfil"className="userinfo">
         <i class="fa-solid fa-circle-user user-pic"></i>
         <h2>Mi perfil</h2>
         </div> 

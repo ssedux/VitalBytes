@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './style/Nav.css';
 import logo from '../assets/logovitalBytes.webp';
 import Submenu1 from './submenu1.jsx';
+ 
 
 const Nav = () => {
     const [isSubmenuVisible, SetIsSubmenuVisible] = useState(false);
@@ -15,7 +16,7 @@ const Nav = () => {
                 <h1 className="titulo">Vital Bytes</h1>
                 <ul className="flex space-x-4">
                     <li>
-                        <a href="/Inicio">Inicio</a>
+                        <a href="/Home">Inicio</a>
                     </li>
                     <li>
                         <a href="/Catalogo">Catalogo</a>
@@ -33,7 +34,7 @@ const Nav = () => {
                     <Submenu1 />
                 </div>
                 <div className="linea-vertical"></div>
-                <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                <i href="/Cart" class="fa-solid fa-cart-shopping cart-icon"></i>
             </nav>
         </div>
     );
