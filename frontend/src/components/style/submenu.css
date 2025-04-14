@@ -39,7 +39,7 @@ hr{
     top: 100%; /* Coloca el submenu justo debajo del elemento padre */
     right: 5%; /* Alinea el submenu a la izquierda */
     color: #914F1E;
-    max-height: 0px;
+    max-height:     0px;
     overflow: hidden;
     transition: max-height 0.3s ease; /* Animación para la apertura del submenu */
 }
@@ -47,7 +47,9 @@ hr{
     max-height: 400px; /* Altura máxima del submenu */
     transition: max-height 0.3s ease; /* Animación para la apertura del submenu */
 }
-
+a{
+    text-decoration: none;
+}
 
 .bloque{
     background: #fff;

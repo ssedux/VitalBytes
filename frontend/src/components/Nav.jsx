@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './style/Nav.css';
 import logo from '../assets/logovitalBytes.webp';
-import Submenu1 from './submenu1.jsx';
- 
+import SubmenuLog from './submenulog.jsx';
 
 const Nav = () => {
-    const [isSubmenuVisible, SetIsSubmenuVisible] = useState(false);
+    const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+
     const ToggleSubmenu = () => {
-        SetIsSubmenuVisible(!isSubmenuVisible);
+        setIsSubmenuVisible(!isSubmenuVisible);
     };
+
     return (
         <div className="div">
             <nav>
@@ -28,13 +29,23 @@ const Nav = () => {
                 <div className="MiPerfil" onClick={ToggleSubmenu}>
                     <i className="fa-solid fa-circle-user user-pic"></i>
                     <a href="#">Mi perfil</a>
-                    <i className={`fa-solid fa-chevron-right arrow-right ${isSubmenuVisible ? ' active' : ''}`}id="arrow-right"></i>
+                    <i
+                        className={`fa-solid fa-chevron-right arrow-right ${
+                            isSubmenuVisible ? 'active' : ''
+                        }`}
+                        id="arrow-right"
+                    ></i>
                 </div>
-                <div className={`submenu ${isSubmenuVisible ? ' active' : ''}`} id="submenu">
-                    <Submenu1 />
+                <div
+                    className={`submenu ${isSubmenuVisible ? 'active' : ''}`}
+                    id="submenu"
+                >
+                    <SubmenuLog />
                 </div>
                 <div className="linea-vertical"></div>
-                <i href="/Cart" class="fa-solid fa-cart-shopping cart-icon"></i>
+                <a href="/Cart">
+                    <i className="fa-solid fa-cart-shopping cart-icon"></i>
+                </a>
             </nav>
         </div>
     );
