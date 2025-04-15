@@ -10,6 +10,10 @@ const Nav = () => {
         setIsSubmenuVisible(!isSubmenuVisible);
     };
 
+    const getActiveClass = (path) => {
+        return window.location.pathname === path ? 'active' : '';
+    };
+
     return (
         <div className="div">
             <nav>
@@ -17,13 +21,13 @@ const Nav = () => {
                 <h1 className="titulo">Vital Bytes</h1>
                 <ul className="flex space-x-4">
                     <li>
-                        <a href="/Home">Inicio</a>
+                        <a href="/Home" className={getActiveClass('/Home')}>Inicio</a>
                     </li>
                     <li>
-                        <a href="/Catalogo">Catalogo</a>
+                        <a href="/Catalogo" className={getActiveClass('/Catalogo')}>Catalogo</a>
                     </li>
                     <li>
-                        <a href="/Contacto">Contacto</a>
+                        <a href="/Contacto" className={getActiveClass('/Contacto')}>Contacto</a>
                     </li>
                 </ul>
                 <div className="MiPerfil" onClick={ToggleSubmenu}>

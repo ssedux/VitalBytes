@@ -65,6 +65,12 @@ nav ul li a{
     text-decoration: none;
 }
 
+ul li a.active {
+    color: #914F1E; /* Cambia el color del enlace activo */
+    font-weight: bold; /* Resalta el enlace activo */
+    border-bottom: 2px solid #914F1E; /* Agrega una línea debajo del enlace activo */
+}
+
 .logo{
     width: 80px; /* Ajusta el ancho según sea necesario */
     height: auto; /* Mantiene la proporción de la imagen */

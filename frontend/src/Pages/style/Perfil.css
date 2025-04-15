@@ -1,0 +1,93 @@
+.perfil-image {
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    margin-left: 50px;
+    padding: 10px;
+    width: 100%; /* Ajusta el ancho del bloque */
+    font-size: 30px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 50px; /* Espaciado vertical entre filas */
+}
+
+.info-label {
+    font-weight: bold;
+    color: #914F1E; /* Color del texto */
+    margin-right: 20px; /* Espaciado entre la etiqueta y el valor */
+    width: 150px; /* Ancho fijo para alinear los valores */
+    text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
+
+.info-value {
+    color: #914F1E; /* Color del valor */
+    flex: 1; /* Permite que los valores ocupen el espacio restante */
+    text-align: left ; /* Alinea el texto de los valores a la izquierda */
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-start; /* Alinea los boetones a la iezquierda */
+    margin-top: 20px;
+    width: 100%;
+}
+
+.logout-button {
+    background-color: #914F1E; /* Fondo café */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    width: 250px; /* Ancho del botón */
+    height: 75px; /* Alto del botón */
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px; /* Espaciado de 20px entre los botones */
+}
+
+.logout-button:hover {
+    background-color: #732F0F; /* Fondo café más oscuro al pasar el mouse */
+    color: white; /* Mantiene el texto blanco */
+}
+
+.edit-button {
+    background-color: #79945E; /* Color verde */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    width: 250px; /* Ancho del botón */
+    height: 75px; /* Alto del botón */
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-button:hover {
+    background-color: #5f7a4a; /* Color más oscuro al pasar el mouse */
+}
+
+.linea-vertical {
+    width: 2px; /* Ancho de la línea */
+    height: 40px; /* Altura de la línea */
+    background-color: #914F1E; /* Color de la línea */
+    margin: 0 20px; /* Espaciado horizontal */
+    display: inline-block; 
+}

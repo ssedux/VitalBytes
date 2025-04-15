@@ -54,7 +54,7 @@ a{
 .bloque{
     background: #fff;
     padding: 1px 20px 1px; /* Espaciado interno */
-
+    border-radius: 5px; /* Bordes redondeados */
     margin: 10px;
     
 }
