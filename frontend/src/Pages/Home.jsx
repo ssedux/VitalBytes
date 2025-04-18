@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Baner from '../assets/Banner.png';
-import Footer from '../components/Footer';
+
 import './style/Home.css';
 
 function Home() {
   return (
     <div className="home">
-      <h1>Home</h1>
       <img src={Baner} alt="Banner" className="home-banner" />
 
       <section className="about-section">
@@ -43,7 +42,7 @@ function Home() {
 
       </section>
 
-      <Footer />
+
     </div>
   );
 }
