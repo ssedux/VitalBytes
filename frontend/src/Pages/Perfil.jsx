@@ -51,19 +51,19 @@ function Perfil() {
               <div className="info-content">
                 <div className="info-row">
                   <span className="info-label">Nombre:</span>
-                  <span className="info-value">Juan Pérez</span>
+                  <span className="info-value">Eduardo Sanchez</span>
                 </div>
                 <div className="info-row">
                   <span className="info-label">Correo:</span>
-                  <span className="info-value">juan.perez@example.com</span>
+                  <span className="info-value">eduardo@example.com</span>
                 </div>
                 <div className="info-row">
                   <span className="info-label">Usuario:</span>
-                  <span className="info-value">juanperez123</span>
+                  <span className="info-value">ssedux</span>
                 </div>
                 <div className="info-row">
                   <span className="info-label">Fecha de nacimiento:</span>
-                  <span className="info-value">01/01/1990</span>
+                  <span className="info-value">09/12/2006</span>
                 </div>
                 <div className="info-row">
                   <span className="info-label">Teléfono:</span>
