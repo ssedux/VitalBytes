@@ -12,7 +12,6 @@ function Categorias({ categories, onCategoryClick }) {
             className="category-item"
             onClick={() => onCategoryClick(category)}
           >
-            
             <span>{category.name}</span>
           </li>
         ))}
