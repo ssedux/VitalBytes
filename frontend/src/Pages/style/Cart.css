@@ -15,6 +15,7 @@
   .cart-products h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: #ddd;
   }
   
   .cart-table {
@@ -27,6 +28,7 @@
     text-align: center;
     padding: 0.75rem;
     border-bottom: 1px solid #ddd;
+    color: #ddd;
   }
   
   .cart-table th {
@@ -105,4 +107,10 @@
   .order-summary input {
     margin-bottom: 1rem; 
   }
-  
+  .cart-total{
+    color: #ddd;
+  }
+  input::placeholder {
+    color:#a25c2c; /* Cambia 'red' por el color que quieras */
+    opacity: 1; /* Asegura que el color se vea bien en todos los navegadores */
+  }
