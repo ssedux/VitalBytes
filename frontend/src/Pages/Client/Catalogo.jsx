@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Categorias from '../components/Categorias'; // Importa el componente
-import './style/Catalogo.css';
+import Categorias from '../../components/Categorias'; // Importa el componente
+import './../style/Client/Catalogo.css';
 
 function Catalogo() {
   const [searchTerm, setSearchTerm] = useState('');

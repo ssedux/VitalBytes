@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import perfilImage from '../assets/Perfil.png'; // Importa la imagen
-import './style/Perfil.css'; // Asegúrate de que la ruta sea correcta
-import Pedido from '../components/Pedido'; // Importa el componente Pedido
+import perfilImage from '../../assets/Perfil.png'; // Importa la imagen
+import './../style/Client/Perfil.css'; // Asegúrate de que la ruta sea correcta
+import Pedido from '../../components/Pedido'; // Importa el componente Pedido
 
 function Perfil() {
   const [activeView, setActiveView] = useState('perfil'); // Estado para controlar la vista activa

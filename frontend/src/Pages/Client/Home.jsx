@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Baner from '../assets/Banner.png';
+import Baner from '../../assets/Banner.png';
 
-import './style/Home.css';
+import './../style/Client/Home.css';
 
 function Home() {
   return (
