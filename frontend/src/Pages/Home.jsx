@@ -1,14 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Baner from '../assets/Banner.png';
-
+import Logo from '../assets/logovitalBytes.webp';
 import './style/Home.css';
 
 function Home() {
+  const [mostrarModal, setMostrarModal] = useState(false);
+
+  const abrirModal = () => {
+    setMostrarModal(true);
+  };
+
+  const cerrarModal = () => {
+    setMostrarModal(false);
+  };
+
   return (
     <div className="home">
       <img src={Baner} alt="Banner" className="home-banner" />
 
+      {/* Botón para abrir el modal */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <button onClick={abrirModal}>Iniciar Sesión</button>
+      </div>
+
+      {/* Modal */}
+      {mostrarModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close" onClick={cerrarModal}>X</button>
+            <img src={Logo} alt="Logo" className="modal-logo" />
+            <h2>Vital Bytes</h2>
+            <div className="modal-tabs">
+              <span className="active-tab">Iniciar sesión</span>
+              
+            </div>
+            <div className="modal-inputs">
+              <input type="text" placeholder="Usuario" />
+              <input type="password" placeholder="Contraseña" />
+            </div>
+            <button className="modal-login-button">Iniciar sesión</button>
+          </div>
+        </div>
+      )}
+
+      {/* Contenido normal de tu Home */}
       <section className="about-section">
         <h2>Acerca de Nosotros</h2>
         <p>
@@ -39,10 +74,7 @@ function Home() {
             sss ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
           </p>
         </div>
-
       </section>
-
-
     </div>
   );
 }

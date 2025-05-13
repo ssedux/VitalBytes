@@ -1,62 +1,66 @@
-import React, { useState } from 'react';
-import Categorias from '../components/Categorias'; // Importa el componente
+import React from 'react';
 import './style/Catalogo.css';
 
 function Catalogo() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Producto A', category: 'Promociones', price: 10 },
-    { id: 2, name: 'Producto B', category: 'Productos Nuevos', price: 20 },
-    { id: 3, name: 'Producto C', category: 'Pollo', price: 15 },
-  ]);
+  const categories = [
+    'Galletas',
+    'Semillas',
+    'Yogurt natural',
+    'Hummus y vegetales',
+    'Barras de granola',
+    'Frutas frescas',
+  ];
 
-  const [categories, setCategories] = useState([
-    { id: 1, name: 'Promociones' },
-    { id: 2, name: 'Productos Nuevos' },
-    { id: 3, name: 'Pollo' },
-    { id: 4, name: 'Extras, Bebidas y Postres' },
-  ]);
-
-  const handleCategoryClick = (category) => {
-    console.log(`Categoría seleccionada: ${category.name}`);
-    // Aquí puedes agregar lógica para filtrar productos por categoría
-  };
-
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const products = [
+    { id: 1, name: 'Producto 1', category: 'Semillas', price: 10 },
+    { id: 2, name: 'Producto 2', category: 'Yogurt natural', price: 15 },
+    { id: 3, name: 'Producto 3', category: 'Galletas', price: 8 },
+    { id: 4, name: 'Producto 4', category: 'Galletas', price: 12 },
+    { id: 5, name: 'Producto 5', category: 'Semillas', price: 11 },
+    { id: 6, name: 'Producto 6', category: 'Yogurt natural', price: 14 },
+    { id: 7, name: 'Producto 7', category: 'Frutas frescas', price: 9 },
+  ];
 
   return (
-    <div className="catalogo">
-      {/* Sidebar de categorías */}
-      <Categorias categories={categories} onCategoryClick={handleCategoryClick} />
+    <div className="catalogo-container">
+      <aside className="sidebar">
+        <h2 className="sidebar-title">Categorías</h2>
+        <ul className="category-list">
+          {categories.map((category, index) => (
+            <li key={index} className="category-item">
+              {category}
+            </li>
+          ))}
+        </ul>
+      </aside>
 
-      {/* Línea vertical divisoria */}
       <div className="divider"></div>
 
-      {/* Contenido principal */}
-      <div className="main-content">
-        {/* Barra de búsqueda */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Buscar productos..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      <main className="main-content">
+        <div className="products-wrapper">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Buscar productos..."
+              className="search-input"
+            />
+          </div>
+          <div className="product-grid">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className={`product-card ${product.id % 2 === 0 ? 'green-bg' : 'beige-bg'}`}
+              >
+                <div className="image-placeholder"></div>
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-price-label">precio:</p>
+                <p className="product-price">${product.price.toFixed(2)}</p>
+                <button className="add-button">+</button>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Lista de productos */}
-        <div className="product-list">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <h3>{product.name}</h3>
-              <p>Categoría: {product.category}</p>
-              <p>Precio: ${product.price}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      </main>
     </div>
   );
 }

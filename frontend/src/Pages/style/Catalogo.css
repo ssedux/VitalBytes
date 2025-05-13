@@ -1,98 +1,135 @@
-.catalogo {
-        --vh: 6.15px;
-    --vw: 13.22px;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    word-wrap: break-word;
-    text-rendering: optimizeLegibility;
-    color: #4c190f;
-    text-align: center;
-    user-select: none;
-    text-size-adjust: none;
-    box-sizing: border-box;
-    vertical-align: baseline;
-    margin: 0px;
-    padding: 0px;
-    border-width: 0px;
-    border-style: initial;
-    border-color: initial;
-    border-image: initial;
-    font: inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit inherit;
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
+.catalogo-container {
+  display: flex;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden; /* Muy importante: evita scroll horizontal general */
 }
 
-
-
-.sidebar h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.sidebar {
+  width: 200px;
+  padding-right: 20px;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
+.sidebar-title {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.sidebar li {
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
+.category-list {
+  list-style: none;
+  padding: 0;
 }
 
-.sidebar li:hover {
-    color: #914F1E;
+.category-item {
+  margin: 10px 0;
+  cursor: pointer;
+  color: #8B4513;
+}
+
+.category-item:hover {
+  font-weight: bold;
 }
 
 .divider {
-    width: 1px;
-    background-color: #914F1E;
-    margin: 0 10px;
+  width: 1px;
+  background-color: #ddd;
+  margin-right: 20px;
 }
 
 .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Productos + buscador */
+.products-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Scroll SOLO vertical */
+  overflow-x: hidden; /* NO scroll horizontal */
+}
+
+/* Buscador */
 .search-bar {
-    margin-bottom: 20px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
 }
 
-.search-bar input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f7f1ea;
 }
 
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta el número de columnas automáticamente */
-    gap: 20px; /* Espaciado entre los productos */
-    width: 100%; /* Ocupa todo el ancho disponible */
+/* Grid de productos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding-bottom: 20px; /* espacio al fondo */
 }
 
+/* Cartas de producto */
 .product-card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  min-height: 250px; /* Altura mínima */
 }
 
-.product-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.beige-bg {
+  background-color: #f7e7d3;
 }
 
-.product-card p {
-    font-size: 14px;
-    margin: 5px 0;
+.green-bg {
+  background-color: #d0f0e0;
+}
+
+.image-placeholder {
+  background-color: #e0e0e0;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.product-price-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-price {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.add-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: #7fc242;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #68a934;
 }
