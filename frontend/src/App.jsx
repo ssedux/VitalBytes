@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 import Nav from './components/Nav.jsx';
-import Home from './Pages/Home.jsx';
-import Catalogo from './Pages/Catalogo.jsx';
-import Contacto from './Pages/Contacto.jsx';
-import Perfil from './Pages/Perfil.jsx';
-import Cart from './Pages/Cart.jsx';
+import Home from './Pages/Client/Home.jsx';
+import Catalogo from './Pages/Client/Catalogo.jsx';
+import Contacto from './Pages/Client/Contacto.jsx';
+import Perfil from './Pages/Client/Perfil.jsx';
+import Cart from './Pages/Client/Cart.jsx';
 import Footer from './components/Footer';
 import './App.css';
 

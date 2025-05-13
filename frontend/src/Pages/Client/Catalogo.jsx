@@ -1,5 +1,7 @@
-import React from 'react';
-import './style/Catalogo.css';
+
+import React, { useState } from 'react';
+import Categorias from '../../components/Categorias'; 
+import './../style/Client/Catalogo.css';
 
 function Catalogo() {
   const categories = [

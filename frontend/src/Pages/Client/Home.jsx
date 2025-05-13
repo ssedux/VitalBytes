@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import Baner from '../assets/Banner.png';
-import Logo from '../assets/logovitalBytes.webp';
-import './style/Home.css';
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Baner from '../../assets/Banner.png';
+
+import './../style/Client/Home.css';
+
 
 function Home() {
   const [mostrarModal, setMostrarModal] = useState(false);
