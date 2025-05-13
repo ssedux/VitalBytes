@@ -51,23 +51,35 @@ function Perfil() {
               <div className="info-content">
                 <div className="info-row">
                   <span className="info-label">Nombre:</span>
-                  <span className="info-value">Eduardo Sanchez</span>
+                  <input className="info-value" placeholder="Nombre"  />
                 </div>
                 <div className="info-row">
                   <span className="info-label">Correo:</span>
-                  <span className="info-value">eduardo@example.com</span>
+                  <input className="info-value" placeholder="Correo electrónico"  />
                 </div>
                 <div className="info-row">
                   <span className="info-label">Usuario:</span>
-                  <span className="info-value">ssedux</span>
+                  <input className="info-value" placeholder="Usuario"  />
                 </div>
                 <div className="info-row">
                   <span className="info-label">Fecha de nacimiento:</span>
-                  <span className="info-value">09/12/2006</span>
+                  <input className="info-value" type="date" placeholder=""  />
                 </div>
                 <div className="info-row">
                   <span className="info-label">Teléfono:</span>
-                  <span className="info-value">+123456789</span>
+                  <input 
+                    className="info-value" 
+                    type="tel" 
+                    placeholder="Teléfono" 
+                    maxLength="9" 
+                    onInput={(e) => {
+                      let value = e.target.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+                      if (value.length > 4) {
+                        value = value.slice(0, 4) + '-' + value.slice(4, 8); // Add dash after 4 characters
+                      }
+                      e.target.value = value;
+                    }}
+                  />
                 </div>
                 <div className="button-row">
                   <button className="logout-button">Cerrar Sesión</button>
