@@ -1,7 +1,5 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
 import Baner from '../../assets/Banner.png';
+import React, { useState } from 'react';
 
 import './../style/Client/Home.css';
 
