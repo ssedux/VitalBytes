@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style/Nav.css';
 import logo from '../assets/logovitalBytes.webp';
-import Submenulog from './submenulog.jsx';
+import Submenu1 from './submenu1.jsx';
 
 const Nav = () => {
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
@@ -45,7 +45,7 @@ const Nav = () => {
                     className={`submenu ${isSubmenuVisible ? 'active' : ''}`}
                     id="submenu"
                 >
-                    <Submenulog />
+                    <Submenu1 />
                 </div>
                 <div className="linea-vertical"></div>
                 <a href="/Cart">

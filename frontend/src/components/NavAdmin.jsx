@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './style/Nav.css';
 import logo from '../assets/logovitalBytes.webp';
-import SubmenuLog from './submenulog.jsx';
 
-const Nav = () => {
+const NavAdmin = () => {
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+    const [isAdminView, setIsAdminView] = useState(true);
 
     const ToggleSubmenu = () => {
         setIsSubmenuVisible(!isSubmenuVisible);
@@ -14,20 +14,30 @@ const Nav = () => {
         return window.location.pathname === path ? 'active' : '';
     };
 
+    const handleAdminLinkClick = (event) => {
+        event.preventDefault(); // Evita la navegación automática
+        const targetPath = event.currentTarget.getAttribute('href');
+        window.history.pushState({}, '', targetPath); // Cambia la URL manualmente
+        window.dispatchEvent(new PopStateEvent('popstate')); // Fuerza la actualización de las rutas
+    };
+
     return (
         <div className="div">
             <nav>
                 <img src={logo} className="logo" alt="Vital Bytes Logo" />
-                <h1 className="titulo">Vital Bytes</h1>
+                <h1 className="titulo">Admin Panel</h1>
                 <ul className="flex space-x-4">
                     <li>
-                        <a href="/Home" className={getActiveClass('/Home')}>Inicio</a>
+                        <a href="/Admin/Home" className={getActiveClass('/Admin/Home')} onClick={handleAdminLinkClick}>Inicio</a>
                     </li>
                     <li>
-                        <a href="/Catalogo" className={getActiveClass('/Catalogo')}>Catalogo</a>
+                        <a href="/Admin/Administracion" className={getActiveClass('/Admin/Administracion')} onClick={handleAdminLinkClick}>Administración</a>
                     </li>
                     <li>
-                        <a href="/Contacto" className={getActiveClass('/Contacto')}>Contacto</a>
+                        <a href="/Admin/Users" className={getActiveClass('/Admin/Users')} onClick={handleAdminLinkClick}>Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Employees" className={getActiveClass('/Admin/Employees')} onClick={handleAdminLinkClick}>Empleados</a>
                     </li>
                 </ul>
                 <div className="MiPerfil" onClick={ToggleSubmenu}>
@@ -44,15 +54,14 @@ const Nav = () => {
                     className={`submenu ${isSubmenuVisible ? 'active' : ''}`}
                     id="submenu"
                 >
-                    <SubmenuLog />
+                    <ul>
+                        <li><a href="/Admin/Perfil">Perfil</a></li>
+                        <li><a href="/logout">Cerrar sesión</a></li>
+                    </ul>
                 </div>
-                <div className="linea-vertical"></div>
-                <a href="/Cart">
-                    <i className="fa-solid fa-cart-shopping cart-icon"></i>
-                </a>
             </nav>
         </div>
     );
 };
 
-export default Nav;
+export default NavAdmin;

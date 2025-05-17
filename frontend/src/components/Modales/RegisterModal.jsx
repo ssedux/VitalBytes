@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from './LogModal.jsx';
+import Modal from './Modal.jsx';
 
 const RegisterModal = ({ isVisible, onClose }) => {
     return (
