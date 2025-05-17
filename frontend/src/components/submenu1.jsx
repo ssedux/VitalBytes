@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style/Submenu.css';
-import Modal from './Modales/Modal.jsx';
+import LogModal from './Modales/logModal.jsx';
 import RegisterModal from './Modales/RegisterModal.jsx';
 
 const Submenu1 = () => {
@@ -9,6 +9,7 @@ const Submenu1 = () => {
 
     const openLoginModal = () => {
         setIsLoginModalVisible(true);
+        setIsRegisterModalVisible(false);
     };
 
     const closeLoginModal = () => {
@@ -17,6 +18,7 @@ const Submenu1 = () => {
 
     const openRegisterModal = () => {
         setIsRegisterModalVisible(true);
+        setIsLoginModalVisible(false);
     };
 
     const closeRegisterModal = () => {
@@ -37,12 +39,16 @@ const Submenu1 = () => {
                 <i className="fa-solid fa-chevron-right arrow-right"></i>
             </a>
 
-            <Modal isVisible={isLoginModalVisible} onClose={closeLoginModal}>
-                <h2>Iniciar Sesión</h2>
-                <p>Aquí puedes agregar el formulario de inicio de sesión.</p>
-            </Modal>
-
-            <RegisterModal isVisible={isRegisterModalVisible} onClose={closeRegisterModal} />
+            <LogModal
+                isVisible={isLoginModalVisible}
+                onClose={closeLoginModal}
+                onSwitchToRegister={openRegisterModal}
+            />
+            <RegisterModal
+                isVisible={isRegisterModalVisible}
+                onClose={closeRegisterModal}
+                onSwitchToLogin={openLoginModal}
+            />
         </div>
     );
 };

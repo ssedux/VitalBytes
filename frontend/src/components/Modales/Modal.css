@@ -29,3 +29,73 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    background: #f7f3ef;
+    border-radius: 6px;
+    padding: 6px 10px;
+    border: 1.5px solid #d2b48c;
+    transition: border-color 0.2s;
+}
+.input-group:focus-within {
+    border-color: #8d6748; /* Café oscuro */
+}
+.input-icon {
+    margin-right: 10px;
+    color: #8d6748;
+    font-size: 1.2em;
+}
+.modal-form input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 1em;
+    color: #5c4032;
+    padding: 8px 0;
+}
+.modal-form input:focus {
+    color: #8d6748;
+}
+.modal-form input:not(:placeholder-shown) {
+    color: #8d6748;
+}
+.modal-form input::placeholder {
+    color: #c8b7a6;
+    opacity: 1;
+    font-weight: 400;
+}
+.modal-btn {
+    width: 100%;
+    background: #8d6748;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+.modal-btn:hover {
+    background: #5c4032;
+}
+.modal-switch-text {
+    text-align: center;
+    margin-top: 12px;
+    color: #5c4032;
+    font-size: 0.97em;
+}
+.modal-switch-link {
+    color: #8d6748;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+.modal-switch-link:hover {
+    color: #5c4032;
+    text-decoration: underline;
+}
