@@ -111,6 +111,6 @@
     color: #ddd;
   }
   input::placeholder {
-    color:#a25c2c; /* Cambia 'red' por el color que quieras */
-    opacity: 1; /* Asegura que el color se vea bien en todos los navegadores */
+    color:#a25c2c; 
+    opacity: 1; 
   }

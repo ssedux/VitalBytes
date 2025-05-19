@@ -1,6 +1,4 @@
-
-import React, { useState } from 'react';
-import Categorias from '../../components/Categorias'; 
+import React from 'react';
 import './../style/Client/Catalogo.css';
 
 function Catalogo() {
@@ -27,13 +25,14 @@ function Catalogo() {
     <div className="catalogo-container">
       <aside className="sidebar">
         <h2 className="sidebar-title">Categorías</h2>
-        <ul className="category-list">
+        <form className="category-list">
           {categories.map((category, index) => (
-            <li key={index} className="category-item">
-              {category}
-            </li>
+            <label key={index} className="category-item">
+              <span>{category}</span>
+              <input type="checkbox" name="categories" value={category} />
+            </label>
           ))}
-        </ul>
+        </form>
       </aside>
 
       <div className="divider"></div>
@@ -51,7 +50,9 @@ function Catalogo() {
             {products.map((product) => (
               <div
                 key={product.id}
-                className={`product-card ${product.id % 2 === 0 ? 'green-bg' : 'beige-bg'}`}
+                className={`product-card ${
+                  product.id % 2 === 0 ? 'green-bg' : 'beige-bg'
+                }`}
               >
                 <div className="image-placeholder"></div>
                 <h3 className="product-name">{product.name}</h3>
