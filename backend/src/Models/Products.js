@@ -5,31 +5,41 @@ const productSchema = new Schema({
         type: String,
         required: true,
         maxLength: 100,
-        minLength : 4
+        minLength: 4
     },
-    idCategory: {
-        type: Schema.Types.ObjectId, 
-        ref: "category",
-        required: true
+    description: {
+        type: String,
+        required: true,
+        maxLength: 500,
     },
     price: {
         type: Number,
         required: true,
         min: 0.1
     },
-    status: {
-        type: Boolean,
+    stock: {
+        type: Number,
         required: true,
-        default: true
+        min: 0
     },
-    description: {
+    image: {
         type: String,
-        required: true,
-        maxLength: 500, 
+        required: true
     },
+    category_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Categories",
+        required: true
+    },
+    state: {
+        type: String,
+        enum: ["Disponible", "Agotado"],
+        default: "Disponible",
+        required: true
+    }
 }, {
     timestamps: true,
     strict: false
 });
 
-export default model("product", productSchema);
+export default model("Products", productSchema);

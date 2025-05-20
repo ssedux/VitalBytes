@@ -10,8 +10,8 @@ clientController.getClient = async (req, res) => {
 
 // INSERT
 clientController.insertClient = async (req, res) => {
-  const { fullname, email, username, password,birth,number } = req.body;
-  const newClient = new ClientModel({fullname, email, username, password,birth,number});
+  const { fullname, email, username, password, birth, phone } = req.body;
+  const newClient = new ClientModel({fullname, email, username, password, birth, phone});
 
   await newClient.save();
   res.json({ message: "Client saved" });
@@ -26,11 +26,24 @@ clientController.deleteClient = async (req, res) => {
 
 // UPDATE
 clientController.updateClient = async (req, res) => {
-  const { fullname, email, username, password,birth,number } = req.body;
-  await clientModel.findByIdAndUpdate(req.params.id,{ fullname, email, username, password,birth,number},
+  const { fullname, email, username, password, birth, phone } = req.body;
+  await clientModel.findByIdAndUpdate(req.params.id,{ fullname, email, username, password, birth, phone},
     { new: true }
   );
   res.json({ message: "Client updated" });
 }
+
+// GET BY ID
+clientController.getClientById = async (req, res) => {
+  try {
+    const client = await clientModel.findById(req.params.id);
+    if (!client) {
+      return res.status(404).json({ message: "Cliente no encontrado" });
+    }
+    res.json(client);
+  } catch (error) {
+    res.status(400).json({ message: "ID inválido o error en la consulta" });
+  }
+};
 
 export default clientController;

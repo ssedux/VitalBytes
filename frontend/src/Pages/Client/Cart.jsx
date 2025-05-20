@@ -17,6 +17,7 @@ function Cart() {
         setProducts(loaded);
       })
       .catch(err => console.error(err));
+    console.log('Cart.jsx cargado, backend productos en puerto 4000');
   }, []);
 
   const addToCart = (product) => {
@@ -47,21 +48,32 @@ function Cart() {
   const total = cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
 
   const handlePurchase = () => {
-    const sale = {
-      idclient: 'idUsuario', //-> Cambiar OJO =C
-      idProduct: cart.map(p => p._id),
-      total,
-      paymentMethod,
-      direction: address,
-      status: 'pendiente'
+    // TODO: Obtener el client_id real del usuario autenticado
+    const client_id = 'CLIENT_ID_PLACEHOLDER';
+    const items = cart.map(p => ({
+      product_id: p._id,
+      quantity: p.quantity,
+      price: p.price
+    }));
+    const order = {
+      client_id,
+      items,
+      total_price: total,
+      // order_date lo pone el backend por defecto
+      state: 'Pendiente',
+      payment_method: paymentMethod,
+      delivery_address: address + (referencePoint ? (', Ref: ' + referencePoint) : '')
     };
 
-    axios.post('http://localhost:4000/api/sales', sale)
+    axios.post('http://localhost:3000/api/orders', order)
       .then(() => {
-        alert('¡Compra exitosa!');
+        alert('¡Pedido realizado exitosamente!');
         setCart([]);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        alert('Error al realizar el pedido');
+        console.error(err);
+      });
   };
 
   return (

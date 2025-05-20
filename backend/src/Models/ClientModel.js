@@ -1,4 +1,3 @@
-
 import { Schema, model } from "mongoose";
 
 const ClientSchema = new Schema(
@@ -38,14 +37,14 @@ const ClientSchema = new Schema(
         required: true,
         validate: {
           validator: function(v) {
-            return v instanceof Date; 
+            return v instanceof Date && !isNaN(v.getTime());
           },
           message: props => `${props.value} no es una fecha válida.`
         }
     },
     
-    number:{
-      type: string,
+    phone:{
+      type: String,
       required: true
     }},
 {
@@ -54,4 +53,4 @@ const ClientSchema = new Schema(
   }
 );
 
-export default model("client", ClientSchema);
+export default model("Clients", ClientSchema);

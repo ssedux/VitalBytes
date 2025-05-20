@@ -3,8 +3,8 @@ como vamos a validar si es cliente o empleado,
 entonces importo ambos modelos
 */
 
-import ClientsModel from "../models/ClientsModel.js";
-import EmployeesModel from "../models/Employee.js";
+import ClientsModel from "../Models/ClientModel.js";
+import EmployeesModel from "../Models/Employee.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { config } from "../config.js";

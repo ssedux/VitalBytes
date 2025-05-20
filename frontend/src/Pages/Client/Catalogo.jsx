@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './../style/Client/Catalogo.css';
+import axios from 'axios';
 
 function Catalogo() {
   const categories = [
@@ -11,15 +12,19 @@ function Catalogo() {
     'Frutas frescas',
   ];
 
-  const products = [
-    { id: 1, name: 'Producto 1', category: 'Semillas', price: 10 },
-    { id: 2, name: 'Producto 2', category: 'Yogurt natural', price: 15 },
-    { id: 3, name: 'Producto 3', category: 'Galletas', price: 8 },
-    { id: 4, name: 'Producto 4', category: 'Galletas', price: 12 },
-    { id: 5, name: 'Producto 5', category: 'Semillas', price: 11 },
-    { id: 6, name: 'Producto 6', category: 'Yogurt natural', price: 14 },
-    { id: 7, name: 'Producto 7', category: 'Frutas frescas', price: 9 },
-  ];
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/api/products')
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="catalogo-container">
@@ -44,21 +49,39 @@ function Catalogo() {
               type="text"
               placeholder="Buscar productos..."
               className="search-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <div className="product-grid">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <div
-                key={product.id}
+                key={product._id}
                 className={`product-card ${
-                  product.id % 2 === 0 ? 'green-bg' : 'beige-bg'
+                  product.state === 'Disponible' ? 'green-bg' : 'beige-bg'
                 }`}
               >
-                <div className="image-placeholder"></div>
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-image"
+                  />
+                ) : (
+                  <div className="image-placeholder"></div>
+                )}
                 <h3 className="product-name">{product.name}</h3>
-                <p className="product-price-label">precio:</p>
-                <p className="product-price">${product.price.toFixed(2)}</p>
-                <button className="add-button">+</button>
+                <p className="product-description">{product.description}</p>
+                <p className="product-price-label">Precio:</p>
+                <p className="product-price">${product.price?.toFixed(2)}</p>
+                <p className="product-stock">Stock: {product.stock}</p>
+                <p className="product-state">Estado: {product.state}</p>
+                <button
+                  className="add-button"
+                  disabled={product.state !== 'Disponible'}
+                >
+                  +
+                </button>
               </div>
             ))}
           </div>

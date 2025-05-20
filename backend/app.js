@@ -1,25 +1,46 @@
-
 import express from "express";
-import cartRoutes from "./Routes/cart.js";
-import clientRoutes from "./Routes/client.js";
-import salesRoutes from "./Routes/sales.js";
+import cors from "cors";
 
-import productsRoutes from "./Routes/products.js"
-import employeeRoutes from "./Routes/employee.js"
-import categoryRoutes from "./Routes/category.js"
+// import cartRoutes from "./src/Routes/cart.js";
+import clientRoutes from "./src/Routes/client.js";
+import salesRoutes from "./src/Routes/sales.js";
+
+import productsRoutes from "./src/Routes/products.js"
+import employeeRoutes from "./src/Routes/employee.js"
+import categoryRoutes from "./src/Routes/category.js"
+import registerClientRoutes from "./src/Routes/registerClient.js"
+import registerEmployeesRoutes from "./src/Routes/registerEmployees.js";
+import cookieParser from "cookie-parser";
+import "./database.js";
+import passwordRecoveryRoutes from "./src/Routes/passwordRecovery.js";
+import loginRoutes from "./src/Routes/login.js";
 
 const app = express();
 
 app.use(express.json());
-
-app.use(cookieParse());
+ 
+app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 app.use("/api/products",productsRoutes)
 app.use("/api/employee",employeeRoutes)
 app.use("/api/category",categoryRoutes)
 
-app.use("/api/cart", cartRoutes);
+// app.use("/api/cart", cartRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/sales", salesRoutes);
+app.use("/api/registerClient", registerClientRoutes);
+app.use("/api/registerEmployees", registerEmployeesRoutes);
+app.use("/api/passwordRecovery", passwordRecoveryRoutes);
+app.use("/api/login", loginRoutes);
+app.get("/api/registerClient", (req, res) => {
+  res.json({ message: "Usa POST para registrar un cliente." });
+});
+app.get("/api/registerClient/:id", (req, res) => {
+  res.status(400).json({ message: "GET no implementado. Usa POST para registrar o consulta /api/client/:id para obtener un cliente." });
+});
 
 export default app;

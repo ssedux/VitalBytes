@@ -22,12 +22,14 @@ const employeeSchema = new Schema({
         required: true
     },
     birth: {
-        type: string,
+        type: String,
         required: true
     },
-    number: {
-        type: Number,
-        required: true,maxLength : 8,minLength:8
+    phone: {
+        type: String,
+        required: true,
+        maxLength: 8,
+        minLength: 8
     },
     role: {
         type: String,
@@ -42,4 +44,4 @@ const employeeSchema = new Schema({
     strict: false
 });
 
-export default model("employee", employeeSchema);
+export default model("Employees", employeeSchema);

@@ -1,10 +1,9 @@
-
 import express from "express";
-import categoryController from "../Controllers/categoryController";
+import categoryController from "../Controllers/categoryController.js";
 const router = express.Router();
 
 router.route("/")
-.get(categoryController.getCategory)
+.get(categoryController.getCategories)
 .post(categoryController.insertCategory);
 
 router.route("/:id")

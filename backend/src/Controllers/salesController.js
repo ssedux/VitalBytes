@@ -16,3 +16,17 @@ salesController.insertsales = async (req, res) => {
   await newsales.save();
   res.json({ message: "sales saved" });
 }
+
+//update
+salesController.updatesales = async (req, res) => {
+  // Implementación pendiente
+  res.status(501).json({ message: "Not implemented" });
+};
+
+//delete
+salesController.deletesales = async (req, res) => {
+  // Implementación pendiente
+  res.status(501).json({ message: "Not implemented" });
+};
+
+export default salesController;

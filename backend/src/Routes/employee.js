@@ -1,6 +1,6 @@
  
 import express from "express";
-import employeeController from "../Controllers/employeeController";
+import employeeController from "../Controllers/employeeController.js";
 const router = express.Router();
 
 router.route("/")

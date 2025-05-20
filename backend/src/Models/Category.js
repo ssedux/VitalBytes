@@ -1,4 +1,3 @@
-
 import {Schema , model} from "mongoose";
 
 const categoryShema = new Schema({
@@ -12,4 +11,4 @@ const categoryShema = new Schema({
 
 );
 
-export default model("category",categoryShema)
+export default model("Categories",categoryShema)

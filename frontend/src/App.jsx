@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from './context/AuthContext.jsx';
 import Nav from './components/Nav.jsx';
 import NavAdmin from './components/NavAdmin.jsx';
 import Home from './Pages/Client/Home.jsx';
@@ -15,18 +16,19 @@ import './App.css';
 
 function App() {
   const [isAdminView, setIsAdminView] = useState(false);
+  const { userType, isAuthenticated } = useAuth();
 
-  const toggleView = () => {
-    setIsAdminView(!isAdminView);
-  };
+  useEffect(() => {
+    if (isAuthenticated && userType === 'admin') {
+      setIsAdminView(true);
+    } else if (!isAuthenticated) {
+      setIsAdminView(false);
+    }
+  }, [isAuthenticated, userType]);
 
   return (
-    <>
       <Router>
         {isAdminView ? <NavAdmin /> : <Nav />}
-        <button onClick={toggleView} className="toggle-view-button">
-          Cambiar a {isAdminView ? 'Vista Cliente' : 'Vista Admin'}
-        </button>
         <Routes>
           {isAdminView ? (
             // Rutas para administrador
@@ -50,7 +52,6 @@ function App() {
         </Routes>
         <Footer />
       </Router>
-    </>
   );
 }
 

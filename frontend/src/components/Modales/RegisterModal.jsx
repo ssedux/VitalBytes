@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Modal from './Modal.jsx';
-import { FaUser, FaUserCircle, FaEnvelope, FaLock, FaBirthdayCake, FaPhone } from 'react-icons/fa';
+import { FaUser, FaUserCircle, FaEnvelope, FaLock, FaBirthdayCake, FaPhone, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext.jsx';
+import VerifyEmailModal from './VerifyEmailModal.jsx';
 
 const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
     const [form, setForm] = useState({
@@ -11,6 +13,12 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
         nacimiento: '',
         telefono: ''
     });
+    const { register } = useAuth();
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [showVerifyModal, setShowVerifyModal] = useState(false);
+    const [pendingRegister, setPendingRegister] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,12 +36,50 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes manejar el registro
+        // Validación de campos
+        if (!form.nombre || !form.usuario || !form.correo || !form.password || !form.nacimiento || !form.telefono) {
+            setError('Todos los campos son obligatorios.');
+            return;
+        }
+        // Validar formato de correo
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.correo)) {
+            setError('Correo electrónico inválido.');
+            return;
+        }
+        // Validar formato de fecha
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(form.nacimiento)) {
+            setError('Fecha de nacimiento inválida.');
+            return;
+        }
+        // Validar teléfono (8 dígitos)
+        if (!/^\d{8}$/.test(form.telefono.replace(/-/g, ''))) {
+            setError('El teléfono debe tener 8 dígitos.');
+            return;
+        }
+        setError('');
+        const userData = {
+            fullname: form.nombre,
+            username: form.usuario,
+            email: form.correo,
+            password: form.password,
+            birth: form.nacimiento,
+            phone: form.telefono.replace(/-/g, ''),
+        };
+        const ok = await register(userData);
+        if (ok) {
+            setSuccess(true);
+            setError('');
+            setPendingRegister(userData.email);
+            setShowVerifyModal(true);
+        } else {
+            setError('Error al registrar. Intenta con otro correo.');
+        }
     };
 
     return (
+        <>
         <Modal isVisible={isVisible} onClose={onClose}>
             <h2>Registrarse</h2>
             <form onSubmit={handleSubmit} className="modal-form">
@@ -73,13 +119,21 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                 <div className="input-group">
                     <FaLock className="input-icon" />
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         placeholder="Contraseña"
                         value={form.password}
                         onChange={handleChange}
                         required
                     />
+                    <span
+                        className="eye-icon"
+                        onClick={() => setShowPassword((v) => !v)}
+                        style={{ cursor: 'pointer', marginLeft: 8 }}
+                        tabIndex={-1}
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                 </div>
                 <div className="input-group">
                     <FaBirthdayCake className="input-icon" />
@@ -104,6 +158,8 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                         required
                     />
                 </div>
+                {error && <div className="modal-error">{error}</div>}
+                {success && <div className="modal-success">¡Registro exitoso!</div>}
                 <button type="submit" className="modal-btn">Registrarse</button>
             </form>
             <p className="modal-switch-text">
@@ -113,6 +169,16 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                 </span>
             </p>
         </Modal>
+        <VerifyEmailModal
+            isVisible={showVerifyModal}
+            onClose={() => setShowVerifyModal(false)}
+            onSuccess={() => {
+                setShowVerifyModal(false);
+                setPendingRegister(null);
+                onClose();
+            }}
+        />
+        </>
     );
 };
 

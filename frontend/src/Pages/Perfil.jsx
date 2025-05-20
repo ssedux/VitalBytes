@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
-import perfilImage from '../assets/Perfil.png'; // Importa la imagen
-import './style/Perfil.css'; // Asegúrate de que la ruta sea correcta
-import Pedido from '../components/Pedido'; // Importa el componente Pedido
+import React, { useState, useEffect } from 'react';
+import perfilImage from '../assets/Perfil.png';
+import './style/Perfil.css';
+import Pedido from '../components/Pedido';
+import axios from 'axios';
+// Si tienes AuthContext, descomenta la siguiente línea:
+// import { useAuth } from '../context/AuthContext';
 
 function Perfil() {
-  const [activeView, setActiveView] = useState('perfil'); // Estado para controlar la vista activa
+  const [activeView, setActiveView] = useState('perfil');
+  const [orders, setOrders] = useState([]);
+  // const { user } = useAuth(); // Si tienes contexto de usuario
 
-  const pedidosPendientes = [
-    { fecha: '2025-04-01', total: 120.5, cantidad: 3 },
-    { fecha: '2025-04-10', total: 45.0, cantidad: 1 },
-  ];
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/orders')
+      .then(res => {
+        // Si tienes user._id, filtra aquí:
+        // setOrders(res.data.filter(order => order.client_id._id === user._id));
+        setOrders(res.data);
+      })
+      .catch(err => console.error(err));
+  }, []);
 
-  const pedidosEntregados = [
-    { fecha: '2025-03-15', total: 89.99, cantidad: 2 },
-    { fecha: '2025-03-20', total: 150.75, cantidad: 4 },
-  ];
+  const pedidosPendientes = orders.filter(o => o.state === 'Pendiente');
+  const pedidosEntregados = orders.filter(o => o.state === 'Finalizado');
 
   return (
     <div className="perfil">
@@ -92,12 +100,13 @@ function Perfil() {
           {activeView === 'pendientes' && (
             <div className="pedidos">
               <h2>Pedidos Pendientes</h2>
+              {pedidosPendientes.length === 0 && <p>No hay pedidos pendientes.</p>}
               {pedidosPendientes.map((pedido, index) => (
                 <Pedido
-                  key={index}
-                  fecha={pedido.fecha}
-                  total={pedido.total}
-                  cantidad={pedido.cantidad}
+                  key={pedido._id || index}
+                  fecha={new Date(pedido.order_date).toLocaleDateString()}
+                  total={pedido.total_price}
+                  cantidad={pedido.items.reduce((acc, item) => acc + item.quantity, 0)}
                 />
               ))}
             </div>
@@ -106,12 +115,13 @@ function Perfil() {
           {activeView === 'entregados' && (
             <div className="pedidos">
               <h2>Pedidos Entregados</h2>
+              {pedidosEntregados.length === 0 && <p>No hay pedidos entregados.</p>}
               {pedidosEntregados.map((pedido, index) => (
                 <Pedido
-                  key={index}
-                  fecha={pedido.fecha}
-                  total={pedido.total}
-                  cantidad={pedido.cantidad}
+                  key={pedido._id || index}
+                  fecha={new Date(pedido.order_date).toLocaleDateString()}
+                  total={pedido.total_price}
+                  cantidad={pedido.items.reduce((acc, item) => acc + item.quantity, 0)}
                 />
               ))}
             </div>

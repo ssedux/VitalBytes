@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import './style/Nav.css';
 import logo from '../assets/logovitalBytes.webp';
 import Submenu1 from './submenu1.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import SubmenuLog from './submenulog.jsx';
 
 const Nav = () => {
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+    const { isAuthenticated } = useAuth();
 
     const ToggleSubmenu = () => {
         setIsSubmenuVisible(!isSubmenuVisible);
@@ -45,7 +48,7 @@ const Nav = () => {
                     className={`submenu ${isSubmenuVisible ? 'active' : ''}`}
                     id="submenu"
                 >
-                    <Submenu1 />
+                    {isAuthenticated ? <SubmenuLog /> : <Submenu1 />}
                 </div>
                 <div className="linea-vertical"></div>
                 <a href="/Cart">
