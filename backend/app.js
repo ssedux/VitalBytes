@@ -14,6 +14,7 @@ import cookieParser from "cookie-parser";
 import "./database.js";
 import passwordRecoveryRoutes from "./src/Routes/passwordRecovery.js";
 import loginRoutes from "./src/Routes/login.js";
+import logoutRoutes from "./src/Routes/logout.js";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/api/registerClient", registerClientRoutes);
 app.use("/api/registerEmployees", registerEmployeesRoutes);
 app.use("/api/passwordRecovery", passwordRecoveryRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api/logout", logoutRoutes);
 app.get("/api/registerClient", (req, res) => {
   res.json({ message: "Usa POST para registrar un cliente." });
 });

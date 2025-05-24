@@ -11,6 +11,9 @@ const registerClientController = {};
 registerClientController.verifyCodeEmail = async (req, res) => {
     const { verificationCode } = req.body;
     const token = req.cookies.VerificationToken;
+    if (!token) {
+        return res.status(400).json({ message: "Token de verificación no encontrado. Por favor, regístrate de nuevo o solicita un nuevo código." });
+    }
     try {
         const decoded = jwt.verify(token, config.JWT.secret);
         const { email, verificationCode: storedCode } = decoded;

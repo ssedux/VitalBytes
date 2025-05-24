@@ -46,7 +46,13 @@ const ClientSchema = new Schema(
     phone:{
       type: String,
       required: true
-    }},
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+      required: true
+    }
+  },
 {
     timestamps: true,
     strict: false,

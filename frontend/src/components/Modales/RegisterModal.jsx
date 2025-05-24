@@ -10,6 +10,7 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
         usuario: '',
         correo: '',
         password: '',
+        confirmPassword: '', // Nuevo campo
         nacimiento: '',
         telefono: ''
     });
@@ -19,6 +20,7 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
     const [showVerifyModal, setShowVerifyModal] = useState(false);
     const [pendingRegister, setPendingRegister] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,8 +41,13 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Validación de campos
-        if (!form.nombre || !form.usuario || !form.correo || !form.password || !form.nacimiento || !form.telefono) {
+        if (!form.nombre || !form.usuario || !form.correo || !form.password || !form.confirmPassword || !form.nacimiento || !form.telefono) {
             setError('Todos los campos son obligatorios.');
+            return;
+        }
+        // Validar que las contraseñas coincidan
+        if (form.password !== form.confirmPassword) {
+            setError('Las contraseñas no coinciden.');
             return;
         }
         // Validar formato de correo
@@ -72,7 +79,10 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
             setSuccess(true);
             setError('');
             setPendingRegister(userData.email);
-            setShowVerifyModal(true);
+            // Espera un momento para mostrar el mensaje de éxito antes de mostrar el modal de verificación
+            setTimeout(() => {
+                setShowVerifyModal(true);
+            }, 1200); // 1.2 segundos
         } else {
             setError('Error al registrar. Intenta con otro correo.');
         }
@@ -80,7 +90,7 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
 
     return (
         <>
-        <Modal isVisible={isVisible} onClose={onClose}>
+        <Modal isVisible={isVisible} onClose={onClose} customClass="register-modal-custom">
             <h2>Registrarse</h2>
             <form onSubmit={handleSubmit} className="modal-form">
                 <div className="input-group">
@@ -114,6 +124,7 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                         value={form.correo}
                         onChange={handleChange}
                         required
+                        autoComplete="email"
                     />
                 </div>
                 <div className="input-group">
@@ -133,6 +144,25 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                         tabIndex={-1}
                     >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
+                <div className="input-group">
+                    <FaLock className="input-icon" />
+                    <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder="Confirmar Contraseña"
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                    <span
+                        className="eye-icon"
+                        onClick={() => setShowConfirmPassword((v) => !v)}
+                        style={{ cursor: 'pointer', marginLeft: 8 }}
+                        tabIndex={-1}
+                    >
+                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
                 <div className="input-group">
@@ -177,6 +207,8 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                 setPendingRegister(null);
                 onClose();
             }}
+            email={form.correo}
+            password={form.password}
         />
         </>
     );

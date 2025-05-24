@@ -1,12 +1,17 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [userType, setUserType] = useState(null); // 'admin' | 'client' | null
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userType, setUserType] = useState(() => localStorage.getItem('userType'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => localStorage.getItem('isAuthenticated') === 'true');
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('userType', userType || '');
+    localStorage.setItem('isAuthenticated', isAuthenticated);
+  }, [userType, isAuthenticated]);
 
   const login = async (email, password) => {
     try {
@@ -18,9 +23,11 @@ export const AuthProvider = ({ children }) => {
       });
       const data = await res.json();
       if (res.ok && data.userType) {
-        setUserType(data.userType);
+        // Normalize admin userType to lowercase for consistency
+        const normalizedType = data.userType.toLowerCase();
+        setUserType(normalizedType);
         setIsAuthenticated(true);
-        return data.userType;
+        return normalizedType;
       } else {
         setUserType(null);
         setIsAuthenticated(false);
@@ -35,24 +42,18 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      console.log('Registering user:', userData); // Log data being sent
       const res = await fetch('http://localhost:4000/api/registerClient', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
       });
-      const data = await res.json();
-      console.log('Register response:', data); // Log backend response
       if (res.ok) {
-        setUserType('client');
-        setIsAuthenticated(true);
         return true;
       } else {
         return false;
       }
     } catch (err) {
-      console.error('Register error:', err); // Log fetch error
       return false;
     }
   };
@@ -64,6 +65,8 @@ export const AuthProvider = ({ children }) => {
     });
     setUserType(null);
     setIsAuthenticated(false);
+    localStorage.removeItem('userType');
+    localStorage.removeItem('isAuthenticated');
   };
 
   return (

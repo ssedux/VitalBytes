@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import Modal from './Modal'; // Usa tu componente Modal si ya tienes uno
+import Modal from './Modal';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext.jsx';
 
-const VerifyEmailModal = ({ isVisible, onClose, onSuccess }) => {
+const VerifyEmailModal = ({ isVisible, onClose, onSuccess, email, password }) => {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +19,12 @@ const VerifyEmailModal = ({ isVisible, onClose, onSuccess }) => {
       }, { withCredentials: true });
       if (res.data.message && res.data.message.toLowerCase().includes('exitosamente')) {
         setSuccess(true);
-        setTimeout(() => {
+        setTimeout(async () => {
           setSuccess(false);
+          // Login automático tras verificación exitosa
+          if (email && password) {
+            await login(email, password);
+          }
           onSuccess && onSuccess();
           onClose();
         }, 1500);

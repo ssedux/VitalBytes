@@ -15,7 +15,11 @@ const Nav = () => {
 
     //constante para nav
     const getActiveClass = (path) => {
-        return window.location.pathname === path ? 'active' : '';
+        // Para la ruta inicial, '/' y '/Home' deben ser activos
+        if ((window.location.pathname === '/' && path === '/Home') || window.location.pathname === path) {
+            return 'active';
+        }
+        return '';
     };
 
     return (
@@ -51,8 +55,11 @@ const Nav = () => {
                     {isAuthenticated ? <SubmenuLog /> : <Submenu1 />}
                 </div>
                 <div className="linea-vertical"></div>
-                <a href="/Cart">
-                    <i className="fa-solid fa-cart-shopping cart-icon"></i>
+                <a href="/Cart" className={getActiveClass('/Cart') + ' cart-link'}>
+                    <i className={
+                        'fa-solid fa-cart-shopping cart-icon' +
+                        (getActiveClass('/Cart') === 'active' ? ' active' : '')
+                    }></i>
                 </a>
             </nav>
         </div>

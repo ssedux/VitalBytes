@@ -31,6 +31,15 @@
     transition: transform 0.3s ease, color 0.3s ease; /* Animación para hover */
 }
 
+.cart-icon.active {
+    color: #914F1E;
+    font-weight: bold;
+    border-bottom: 2px solid #914F1E;
+    font-size: 28px;
+    /* Puedes agregar sombra o animación si quieres */
+    /* box-shadow: 0 2px 8px #914F1E33; */
+}
+
 .MiPerfil .user-pic {
     color: #914F1E; /* Color del ícono */
     margin-right: 5px; /* Espaciado entre el ícono y el texto */

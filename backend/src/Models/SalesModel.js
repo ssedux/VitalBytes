@@ -68,4 +68,4 @@ const salesHistorySchema = new Schema(
     }
 );
 
-export default model("Sales_History", salesHistorySchema);
+export default model("sales", salesHistorySchema);
