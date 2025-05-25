@@ -15,6 +15,7 @@ import "./database.js";
 import passwordRecoveryRoutes from "./src/Routes/passwordRecovery.js";
 import loginRoutes from "./src/Routes/login.js";
 import logoutRoutes from "./src/Routes/logout.js";
+import blogRoutes from "./src/Routes/blog.js"
 
 const app = express();
 
@@ -44,5 +45,7 @@ app.get("/api/registerClient", (req, res) => {
 app.get("/api/registerClient/:id", (req, res) => {
   res.status(400).json({ message: "GET no implementado. Usa POST para registrar o consulta /api/client/:id para obtener un cliente." });
 });
+
+app.use("/api/blog", blogRoutes);
 
 export default app;

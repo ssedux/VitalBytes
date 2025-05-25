@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './../style/Client/Catalogo.css';
 import axios from 'axios';
+import ProductModal from '../../components/Modales/DetailProducts';
 
 function Catalogo() {
   const categories = [
@@ -14,10 +15,11 @@ function Catalogo() {
 
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/products')
+      .get('http://localhost:4000/api/products')
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -25,6 +27,14 @@ function Catalogo() {
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleCardClick = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const closeModal = () => {
+    setSelectedProduct(null);
+  };
 
   return (
     <div className="catalogo-container">
@@ -53,6 +63,7 @@ function Catalogo() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
+
           <div className="product-grid">
             {filteredProducts.map((product) => (
               <div
@@ -60,6 +71,7 @@ function Catalogo() {
                 className={`product-card ${
                   product.state === 'Disponible' ? 'green-bg' : 'beige-bg'
                 }`}
+                onClick={() => handleCardClick(product)}
               >
                 {product.image ? (
                   <img
@@ -71,22 +83,19 @@ function Catalogo() {
                   <div className="image-placeholder"></div>
                 )}
                 <h3 className="product-name">{product.name}</h3>
-                <p className="product-description">{product.description}</p>
                 <p className="product-price-label">Precio:</p>
                 <p className="product-price">${product.price?.toFixed(2)}</p>
-                <p className="product-stock">Stock: {product.stock}</p>
-                <p className="product-state">Estado: {product.state}</p>
-                <button
-                  className="add-button"
-                  disabled={product.state !== 'Disponible'}
-                >
-                  +
-                </button>
+                <p className="product-state">
+                  {product.state === 'Disponible' ? 'Disponible' : 'No disponible'}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </main>
+
+      {}
+      <ProductModal product={selectedProduct} onClose={closeModal} />
     </div>
   );
 }
