@@ -1,0 +1,86 @@
+.orders-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.orders-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.add-order-btn {
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.orders-container {
+  padding: 20px;
+  background-color: #00000027;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-order-btn {
+  background-color: #ff7777;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.orders-list {
+  margin-top: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.search-bar {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.order-filter-select {
+  padding: 0.5rem;
+  font-size: 1rem;
+    border-radius: 10px;
+    color: #553e2f;
+    border-color: #f5f5f5;
+}
+
+.txt{
+  color: azure;
+}

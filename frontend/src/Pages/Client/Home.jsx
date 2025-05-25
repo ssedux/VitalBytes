@@ -66,14 +66,12 @@ function Home() {
         <div className="card">
           <h3>Términos y Condiciones</h3>
           <p>
-            sss ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
+           Al acceder y utilizar esta tienda en línea, aceptas que los productos ofrecidos son alimentos saludables sujetos a disponibilidad, y que toda la información brindada es veraz y actualizada. Nos reservamos el derecho de modificar precios, descripciones, y políticas sin previo aviso, así como de rechazar pedidos por razones justificadas como sospecha de fraude o falta de inventario.          </p>
         </div>
         <div className="card">
           <h3>Política de Privacidad</h3>
           <p>
-            sss ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
+            Los pedidos realizados están sujetos a confirmación y se procesan con base en disponibilidad y tiempo estimado de entrega. No aceptamos devoluciones de productos alimenticios salvo en caso de daño comprobable. El uso del sitio implica la aceptación de nuestras políticas de privacidad, propiedad intelectual y responsabilidad por el consumo adecuado de nuestros productos, incluyendo alergias o restricciones personales.          </p>
         </div>
       </section>
     </div>
