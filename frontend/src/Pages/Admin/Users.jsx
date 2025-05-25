@@ -4,8 +4,8 @@ import axios from 'axios';
 const Users = () => {
     return (
         <div>
-            <h1>Users</h1>
-            <p>Bienvenido a la página de usuarios.</p>
+            <h1>Clientes</h1>
+            <p>Administra aquí los clientes registrados en la plataforma.</p>
         </div>
     );
 };

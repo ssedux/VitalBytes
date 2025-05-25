@@ -1,0 +1,59 @@
+nav {
+    background: white;
+    padding: 0 30px 0 30px; /* Padding horizontal para evitar que los botones se desborden */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    min-width: 0;
+    flex-wrap: nowrap; /* Evita que los elementos se vayan a otra línea */
+    box-sizing: border-box;
+    overflow-x: auto; /* Permite scroll horizontal si no cabe */
+}
+
+.admin-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap; /* Evita salto de línea en los botones */
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.admin-nav-link {
+    padding: 8px 18px;
+    border-radius: 6px;
+    color: #5c4032;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap; /* Evita que el texto de los botones se divida */
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.admin-nav-link.active {
+  background: #f7f3ef;
+  color: #8d6748;
+  border-bottom: 3px solid #d2b48c;
+  font-weight: bold;
+}
+
+.admin-nav-link:hover {
+  background: #f0e6d6;
+  color: #8d6748;
+}
+
+h1.titulo {
+    font-size: 24px;
+    color: #914F1E;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    max-width: 180px; /* Limita el ancho del título */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+}

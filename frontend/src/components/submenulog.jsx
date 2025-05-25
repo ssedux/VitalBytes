@@ -1,12 +1,15 @@
 import React from 'react';
 import './style/Submenu.css';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const SubmenuLog = () => {
     const { logout } = useAuth();
+    const navigate = useNavigate();
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
+        navigate('/'); // Redirige a la vista de inicio
     };
     return (
  

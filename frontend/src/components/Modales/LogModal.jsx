@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal.jsx';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -21,6 +21,12 @@ const LogModal = ({ isVisible, onClose, onSwitchToRegister }) => {
         }
     };
 
+    useEffect(() => {
+        if (isVisible && window.location.pathname.startsWith('/Admin')) {
+            window.location.href = '/Admin/Pedidos';
+        }
+    }, [isVisible]);
+
     return (
         <Modal isVisible={isVisible} onClose={onClose}>
             <h2>Iniciar Sesión</h2>
@@ -28,8 +34,8 @@ const LogModal = ({ isVisible, onClose, onSwitchToRegister }) => {
                 <div className="input-group">
                     <FaEnvelope className="input-icon" />
                     <input
-                        type="email"
-                        placeholder="Correo Electrónico"
+                        type="text"
+                        placeholder="Correo electrónico o usuario"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

@@ -25,8 +25,10 @@ const Nav = () => {
     return (
         <div className="div">
             <nav>
-                <img src={logo} className="logo" alt="Vital Bytes Logo" />
-                <h1 className="titulo">Vital Bytes</h1>
+                <div className="logo-titulo-row">
+                    <img src={logo} className="logo" alt="Vital Bytes Logo" />
+                    <h1 className="titulo">Vital Bytes</h1>
+                </div>
                 <ul className="flex space-x-4">
                     <li>
                         <a href="/Home" className={getActiveClass('/Home')}>Inicio</a>
@@ -38,15 +40,24 @@ const Nav = () => {
                         <a href="/Contacto" className={getActiveClass('/Contacto')}>Contacto</a>
                     </li>
                 </ul>
-                <div className="MiPerfil" onClick={ToggleSubmenu}>
-                    <i className="fa-solid fa-circle-user user-pic"></i>
-                    <a href="#">Mi perfil</a>
-                    <i
-                        className={`fa-solid fa-chevron-right arrow-right ${
-                            isSubmenuVisible ? 'active' : ''
-                        }`}
-                        id="arrow-right"
-                    ></i>
+                <div className="perfil-cart-row">
+                    <div className="MiPerfil" onClick={ToggleSubmenu}>
+                        <i className="fa-solid fa-circle-user user-pic"></i>
+                        <a href="#">Mi perfil</a>
+                        <i
+                            className={`fa-solid fa-chevron-right arrow-right ${
+                                isSubmenuVisible ? 'active' : ''
+                            }`}
+                            id="arrow-right"
+                        ></i>
+                    </div>
+                    <div className="linea-vertical"></div>
+                    <a href="/Cart" className={getActiveClass('/Cart') + ' cart-link'}>
+                        <i className={
+                            'fa-solid fa-cart-shopping cart-icon' +
+                            (getActiveClass('/Cart') === 'active' ? ' active' : '')
+                        }></i>
+                    </a>
                 </div>
                 <div
                     className={`submenu ${isSubmenuVisible ? 'active' : ''}`}
@@ -54,13 +65,6 @@ const Nav = () => {
                 >
                     {isAuthenticated ? <SubmenuLog /> : <Submenu1 />}
                 </div>
-                <div className="linea-vertical"></div>
-                <a href="/Cart" className={getActiveClass('/Cart') + ' cart-link'}>
-                    <i className={
-                        'fa-solid fa-cart-shopping cart-icon' +
-                        (getActiveClass('/Cart') === 'active' ? ' active' : '')
-                    }></i>
-                </a>
             </nav>
         </div>
     );

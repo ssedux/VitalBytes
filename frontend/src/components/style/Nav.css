@@ -2,9 +2,13 @@
     position: relative; /* Permite posicionar elementos hijos en relación a este contenedor */
     cursor: pointer; /* Cambia  el cursor al pasar sobre la sección */
     z-index: 10; /* Asegura que este div esté encima de otros elementos */
-    padding: 10px 10px; /* Espaciado interno */
-    width: 300px; /* Ancho completo */
+    padding: 8px 12px; /* Menos padding */
+    width: auto; /* Ajuste automático al contenido */
+    min-width: 125px; /* Ancho mínimo para evitar que se colapse */
+    max-width: 240px; /* Más ancho para evitar salto de línea en 'Mi perfil' */
     display: flex; /* Alinea los elementos horizontalmente */
+    align-items: center;
+    gap: 8px; /* Espacio entre elementos internos */
 }
 .MiPerfil a{
     color : #914F1E; /* Color del texto */
@@ -45,13 +49,19 @@
     margin-right: 5px; /* Espaciado entre el ícono y el texto */
 }
 
-h1{
-    color: #914F1E; /* Color del texto */
-    font-size: 24px; /* Tamaño de la fuente */
-    margin: 0; /* Elimina el margen por defecto */
-    padding: 0; /* Elimina el padding por defecto */
-    width: 100%; /* Ancho completo */
+h1, .titulo, h1.titulo {
+    color: #914F1E;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    max-width: 180px; /* Limita el ancho del título */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
 }
+
 nav{
     background:white;
     padding:px px 10%;
@@ -96,4 +106,85 @@ ul li a.active {
 .arrow-right.active {
     transition: transform 0.3s ease; /* Animación suave */
     transform: rotate(90deg); /* Rota el ícono 90 grados */
+}
+
+.logo-titulo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+}
+
+.perfil-cart-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 8px;
+        min-width: 0;
+        overflow-x: visible;
+    }
+    .logo-titulo-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    .logo {
+        width: 60px;
+        margin-bottom: 0;
+    }
+    h1, .titulo, h1.titulo {
+        font-size: 18px;
+        max-width: 120px;
+        margin-bottom: 0;
+    }
+    nav ul {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+        padding-left: 0;
+        margin-left: 0;
+        text-align: left;
+    }
+    nav ul li {
+        display: inline-block;
+        width: auto;
+        text-align: left;
+        margin: 0 8px 0 0;
+    }
+    nav ul li a {
+        padding: 8px 0;
+        width: auto;
+        text-align: left;
+        font-size: 16px;
+    }
+    .perfil-cart-row {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .MiPerfil {
+        max-width: 100%;
+        width: auto;
+        justify-content: flex-start;
+        margin-top: 0;
+        gap: 6px;
+        padding: 6px 8px;
+    }
+    .linea-vertical {
+        margin: 0 8px;
+        height: 32px;
+    }
+    .cart-icon {
+        margin: 0 0 0 0;
+        font-size: 22px;
+    }
 }
