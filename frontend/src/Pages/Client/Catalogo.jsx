@@ -4,18 +4,21 @@ import axios from 'axios';
 import ProductModal from '../../components/Modales/DetailProducts';
 
 function Catalogo() {
-  const categories = [
-    'Galletas',
-    'Semillas',
-    'Yogurt natural',
-    'Hummus y vegetales',
-    'Barras de granola',
-    'Frutas frescas',
-  ];
+  const [categories, setCategories] = useState([]);
 
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/api/category')
+      .then((res) => {
+        console.log('Categorías API:', res.data);
+        setCategories(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   useEffect(() => {
     axios
@@ -41,12 +44,16 @@ function Catalogo() {
       <aside className="sidebar">
         <h2 className="sidebar-title">Categorías</h2>
         <form className="category-list">
-          {categories.map((category, index) => (
-            <label key={index} className="category-item">
-              <span>{category}</span>
-              <input type="checkbox" name="categories" value={category} />
-            </label>
-          ))}
+          {categories.map((category, index) => {
+            const label = category.name || category;
+            const key = category._id || category.id || index;
+            return (
+              <label key={key} className="category-item">
+                <span>{label}</span>
+                <input type="checkbox" name="categories" value={label} />
+              </label>
+            );
+          })}
         </form>
       </aside>
 
@@ -94,7 +101,6 @@ function Catalogo() {
         </div>
       </main>
 
-      {}
       <ProductModal product={selectedProduct} onClose={closeModal} />
     </div>
   );

@@ -9,7 +9,7 @@
   justify-content: space-between;
   gap: 15px;
   margin-bottom: 20px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .left-group {
@@ -17,6 +17,7 @@
   align-items: center;
   gap: 15px;
   flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .products-title {
@@ -50,7 +51,6 @@
   flex-shrink: 0;
   width: auto;
   max-width: 150px;
-  margin-right: 40px;
   transition: background-color 0.3s ease;
 }
 
@@ -63,6 +63,7 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .product-card {
@@ -74,6 +75,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 250px; /* Altura fija razonable */
+  overflow: hidden; /* Para evitar que el contenido desborde */
 }
 
 .product-info {
@@ -191,6 +194,7 @@
 @media (max-width: 768px) {
   .product-card {
     width: 100%;
+    height: auto; /* En móviles, que se adapte automáticamente */
   }
 
   .products-search {
