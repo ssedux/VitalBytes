@@ -1,0 +1,94 @@
+.users-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.titulo {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.descripcion {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.buscador {
+  width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #edd1b6;
+  color: #753b08;
+  margin-bottom: 20px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.tabla thead {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 14px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+}
+
+.tabla tbody {
+  background-color: #ffe4b3;
+  font-size: 14px;
+}
+
+.tabla tr:nth-child(even) {
+  background-color: #ffefcc;
+}
+
+/* Botones */
+.btn-editar,
+.btn-eliminar {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.btn-editar {
+  background-color: #396341;
+}
+
+.btn-eliminar {
+  background-color: #753e3e;
+}
+
+/* Hover */
+.btn-editar:hover,
+.btn-eliminar:hover {
+  opacity: 0.9;
+}
+
+/* Activo (clic) */
+.btn-editar:active,
+.btn-eliminar:active {
+  background-color: #800080 !important;
+  color: white;
+}

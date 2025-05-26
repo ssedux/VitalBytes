@@ -1,0 +1,80 @@
+.employees-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+.txt{
+    color: white;
+}
+
+.txth1{
+    color: white;
+    size: 51px;
+}
+
+.modal-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.tabla th,
+.tabla td {
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+}
+
+.tabla thead {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tabla tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.btn-editar,
+.btn-eliminar {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-editar {
+  background-color: #396341;
+}
+
+.modal-btn{
+    width: 20%;
+}
+
+.btn-eliminar {
+  background-color: #753e3e;
+}
+
+.btn-editar:active,
+.btn-eliminar:active {
+  background-color: #800080 !important;
+}
