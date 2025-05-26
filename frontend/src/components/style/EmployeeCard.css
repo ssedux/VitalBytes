@@ -1,0 +1,45 @@
+.employee-card {
+  background-color: #fff3e6;
+  border: 1px solid #ffc080;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  margin: 10px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.employee-card h3 {
+  color: #753b08;
+  margin-bottom: 10px;
+}
+
+.employee-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.btn-actualizar {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-actualizar:hover {
+  background-color: #45a049;
+}
+
+.alerta-exito {
+  margin-top: 12px;
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 6px;
+  font-size: 14px;
+}

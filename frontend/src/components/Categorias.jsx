@@ -1,5 +1,5 @@
 import React from 'react';
-import './style/Categorias.css'; // Asegúrate de crear este archivo para los estilos
+import './style/Categorias.css'; 
 
 function Categorias({ categories, onCategoryClick }) {
   return (

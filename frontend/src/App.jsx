@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { useAuth } from './context/AuthContext.jsx';
+import { CartProvider } from './context/CartContext.jsx'; 
 import Nav from './components/Nav.jsx';
 import NavAdmin from './components/NavAdmin.jsx';
 import Home from './Pages/Client/Home.jsx';
@@ -41,37 +42,35 @@ function App() {
   }, [isAuthenticated, userType]);
 
   return (
-    <Router>
-      {isAdminView ? <NavAdmin /> : <Nav />}
+    <CartProvider>
+      <Router>
+        {isAdminView ? <NavAdmin /> : <Nav />}
 
-      <Routes>
-        {isAdminView ? (
-          // Rutas para administrador
-          <>
-            <Route path="/Admin/Pedidos" element={<Orders />} />
-            <Route path="/Admin/Ventas" element={<Sales />} />
-            <Route path="/Admin/Productos" element={<Products />} />
-            <Route path="/Admin/Clientes" element={<Users />} />
-            <Route path="/Admin/Employees" element={<Employees />} />
-            
-            {/* Ruta catch-all para /Admin no reconocidas */}
-            <Route path="/Admin/*" element={<Navigate to="/Admin/Pedidos" replace />} />
-          </>
-        ) : (
-          // Rutas para cliente
-          <>
-            <Route path="/" element={<Navigate to="/Home" />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Catalogo" element={<Catalogo />} />
-            <Route path="/Contacto" element={<Contacto />} />
-            <Route path="/Perfil" element={<Perfil />} />
-            <Route path="/Cart" element={<Cart />} />
-          </>
-        )}
-      </Routes>
+        <Routes>
+          {isAdminView ? (
+            <>
+              <Route path="/Admin/Pedidos" element={<Orders />} />
+              <Route path="/Admin/Ventas" element={<Sales />} />
+              <Route path="/Admin/Productos" element={<Products />} />
+              <Route path="/Admin/Clientes" element={<Users />} />
+              <Route path="/Admin/Employees" element={<Employees />} />
+              <Route path="/Admin/*" element={<Navigate to="/Admin/Pedidos" replace />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Navigate to="/Home" />} />
+              <Route path="/Home" element={<Home />} />
+              <Route path="/Catalogo" element={<Catalogo />} />
+              <Route path="/Contacto" element={<Contacto />} />
+              <Route path="/Perfil" element={<Perfil />} />
+              <Route path="/Cart" element={<Cart />} />
+            </>
+          )}
+        </Routes>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
 }
 

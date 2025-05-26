@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import './../style/Client/Catalogo.css';
 import axios from 'axios';
 import ProductModal from '../../components/Modales/DetailProducts';
+import { useCart } from '../../context/CartContext'; // Ajusta ruta
 
 function Catalogo() {
   const [categories, setCategories] = useState([]);
-
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const { cart, addToCart, updateQuantity } = useCart();
 
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/category')
       .then((res) => {
-        console.log('Categorías API:', res.data);
         setCategories(res.data);
       })
       .catch((err) => console.error(err));
@@ -27,9 +29,30 @@ function Catalogo() {
       .catch((err) => console.error(err));
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    setSelectedCategories((prev) => {
+      if (checked) {
+        return [...prev, value];
+      } else {
+        return prev.filter((cat) => cat !== value);
+      }
+    });
+  };
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+
+    if (selectedCategories.length === 0) {
+      return matchesSearch;
+    }
+
+    const productCategory = product.category?.name || product.category || '';
+
+    const matchesCategory = selectedCategories.includes(productCategory);
+
+    return matchesSearch && matchesCategory;
+  });
 
   const handleCardClick = (product) => {
     setSelectedProduct(product);
@@ -50,7 +73,13 @@ function Catalogo() {
             return (
               <label key={key} className="category-item">
                 <span>{label}</span>
-                <input type="checkbox" name="categories" value={label} />
+                <input
+                  type="checkbox"
+                  name="categories"
+                  value={label}
+                  onChange={handleCategoryChange}
+                  checked={selectedCategories.includes(label)}
+                />
               </label>
             );
           })}
@@ -72,31 +101,73 @@ function Catalogo() {
           </div>
 
           <div className="product-grid">
-            {filteredProducts.map((product) => (
-              <div
-                key={product._id}
-                className={`product-card ${
-                  product.state === 'Disponible' ? 'green-bg' : 'beige-bg'
-                }`}
-                onClick={() => handleCardClick(product)}
-              >
-                {product.image ? (
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-image"
-                  />
-                ) : (
-                  <div className="image-placeholder"></div>
-                )}
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-price-label">Precio:</p>
-                <p className="product-price">${product.price?.toFixed(2)}</p>
-                <p className="product-state">
-                  {product.state === 'Disponible' ? 'Disponible' : 'No disponible'}
-                </p>
-              </div>
-            ))}
+            {filteredProducts.map((product) => {
+              const inCart = cart.find(p => p._id === product._id);
+
+              return (
+                <div
+                  key={product._id}
+                  className="product-card"
+                  onClick={() => handleCardClick(product)}
+                >
+                  <div className="product-image-container">
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="product-image"
+                      />
+                    ) : (
+                      <div className="image-placeholder"></div>
+                    )}
+                  </div>
+
+                  <div className="product-content">
+                    <h3 className="product-name">{product.name}</h3>
+
+                    <div className="product-price-container">
+                      <span className="product-price-label">Precio:</span>
+                      <span className="product-price">${product.price?.toFixed(2)}</span>
+                    </div>
+
+                    <p
+                      className={`product-state ${
+                        product.state === 'Disponible' ? 'disponible' : 'no-disponible'
+                      }`}
+                    >
+                      {product.state}
+                    </p>
+                  </div>
+
+                  {inCart ? (
+                    <div
+                      className="quantity-controls"
+                      onClick={e => e.stopPropagation()}
+                      style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                    >
+                      <button
+                        onClick={() => updateQuantity(product._id, -1)}
+                        disabled={inCart.quantity <= 1}
+                      >
+                        -
+                      </button>
+                      <span>{inCart.quantity}</span>
+                      <button onClick={() => updateQuantity(product._id, 1)}>+</button>
+                    </div>
+                  ) : (
+                    <button
+                      className="add-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                    >
+                      +
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </main>
