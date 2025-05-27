@@ -1,123 +1,69 @@
 import React, { useEffect, useState } from 'react';
 import '../style/Admin/users.css';
-
-const usuariosEjemplo = [
-  {
-    idCliente: '001',
-    nombre: 'Juan Pérez',
-    usuario: 'jperez',
-    correo: 'juan@example.com',
-    contraseña: '********',
-    fechaNac: '1990-05-20',
-    telefono: '555-1234'
-  },
-  {
-    idCliente: '002',
-    nombre: 'María López',
-    usuario: 'mlopez',
-    correo: 'maria@example.com',
-    contraseña: '********',
-    fechaNac: '1985-11-15',
-    telefono: '555-5678'
-  },
-  {
-    idCliente: '003',
-    nombre: 'Carlos Ruiz',
-    usuario: 'cruiz',
-    correo: 'carlos@example.com',
-    contraseña: '********',
-    fechaNac: '1992-02-10',
-    telefono: '555-9012'
-  },
-  {
-    idCliente: '004',
-    nombre: 'Ana Torres',
-    usuario: 'atorres',
-    correo: 'ana@example.com',
-    contraseña: '********',
-    fechaNac: '1991-08-07',
-    telefono: '555-3456'
-  },
-  {
-    idCliente: '005',
-    nombre: 'Luis Gómez',
-    usuario: 'lgomez',
-    correo: 'luis@example.com',
-    contraseña: '********',
-    fechaNac: '1988-03-12',
-    telefono: '555-7890'
-  },
-  {
-    idCliente: '006',
-    nombre: 'Laura Sánchez',
-    usuario: 'lsanchez',
-    correo: 'laura@example.com',
-    contraseña: '********',
-    fechaNac: '1993-10-25',
-    telefono: '555-4567'
-  },
-  {
-    idCliente: '007',
-    nombre: 'Diego Fernández',
-    usuario: 'dfernandez',
-    correo: 'diego@example.com',
-    contraseña: '********',
-    fechaNac: '1989-04-30',
-    telefono: '555-6789'
-  },
-  {
-    idCliente: '008',
-    nombre: 'Camila Herrera',
-    usuario: 'cherrera',
-    correo: 'camila@example.com',
-    contraseña: '********',
-    fechaNac: '1995-07-14',
-    telefono: '555-2345'
-  },
-  {
-    idCliente: '009',
-    nombre: 'Andrés Castro',
-    usuario: 'acastro',
-    correo: 'andres@example.com',
-    contraseña: '********',
-    fechaNac: '1994-09-19',
-    telefono: '555-1122'
-  },
-  {
-    idCliente: '010',
-    nombre: 'Valentina Ríos',
-    usuario: 'vrios',
-    correo: 'valentina@example.com',
-    contraseña: '********',
-    fechaNac: '1996-01-03',
-    telefono: '555-3344'
-  }
-];
+import swal from 'sweetalert';
+import EditUserModal from '../../components/Modales/EditUserModal';
 
 const Users = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [usuarioEditar, setUsuarioEditar] = useState(null);
+
+  const cargarUsuarios = () => {
+    fetch('http://localhost:4000/api/client')
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error('Error al cargar usuarios:', err));
+  };
 
   useEffect(() => {
-    setUsuarios(usuariosEjemplo);
+    cargarUsuarios();
   }, []);
 
   const usuariosFiltrados = usuarios.filter(user =>
     Object.values(user).some(value =>
-      value.toLowerCase().includes(busqueda.toLowerCase())
+      typeof value === 'string' && value.toLowerCase().includes(busqueda.toLowerCase())
     )
   );
 
   const handleEliminar = (id) => {
-    const confirmacion = window.confirm("¿Estás seguro que deseas eliminar este usuario?");
-    if (confirmacion) {
-      setUsuarios(prevUsuarios => prevUsuarios.filter(user => user.idCliente !== id));
-    }
+    swal({
+      title: "¿Estás seguro?",
+      text: "Una vez eliminado, no podrás recuperar este usuario.",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(`http://localhost:4000/api/client/${id}`, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(() => {
+            swal("Usuario eliminado", { icon: "success" });
+            setUsuarios(prev => prev.filter(user => user._id !== id));
+          })
+          .catch(err => {
+            console.error(err);
+            swal("Error al eliminar usuario", { icon: "error" });
+          });
+      }
+    });
   };
 
   const handleEditar = (id) => {
-    alert(`Editar usuario con ID: ${id}`);
-    // Aquí puedes abrir un modal o navegar a otra vista con los datos del usuario a editar
+    const usuario = usuarios.find(u => u._id === id);
+    setUsuarioEditar(usuario);
+    setModalVisible(true);
+  };
+
+  const cerrarModal = () => {
+    setModalVisible(false);
+    setUsuarioEditar(null);
+  };
+
+  const actualizarLista = () => {
+    cargarUsuarios();
   };
 
   return (
@@ -135,7 +81,6 @@ const Users = () => {
         <table className="tabla">
           <thead>
             <tr>
-              <th>IdCliente</th>
               <th>Nombre</th>
               <th>Usuario</th>
               <th>Correo</th>
@@ -147,23 +92,29 @@ const Users = () => {
           </thead>
           <tbody>
             {usuariosFiltrados.map((user) => (
-              <tr key={user.idCliente}>
-                <td>{user.idCliente}</td>
-                <td>{user.nombre}</td>
-                <td>{user.usuario}</td>
-                <td>{user.correo}</td>
-                <td>{user.contraseña}</td>
-                <td>{user.fechaNac}</td>
-                <td>{user.telefono}</td>
+              <tr key={user._id}>
+                <td>{user.fullname}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>********</td>
+                <td>{new Date(user.birth).toLocaleDateString()}</td>
+                <td>{user.phone}</td>
                 <td>
-                  <button className="btn-editar" onClick={() => handleEditar(user.idCliente)}>Editar</button>
-                  <button className="btn-eliminar" onClick={() => handleEliminar(user.idCliente)}>Eliminar</button>
+                  <button className="btn-editar" onClick={() => handleEditar(user._id)}>Editar</button>
+                  <button className="btn-eliminar" onClick={() => handleEliminar(user._id)}>Eliminar</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <EditUserModal
+        isVisible={modalVisible}
+        onClose={cerrarModal}
+        userToEdit={usuarioEditar}
+        onUserUpdated={actualizarLista}
+      />
     </div>
   );
 };

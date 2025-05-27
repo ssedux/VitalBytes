@@ -8,19 +8,17 @@ const ModalEditarProducto = ({
   handleChange,
   handleImageUpload,
   previewImage,
-  actualizarProducto,
-  categories
+  guardarProducto,
+  categories,
+  isEditMode,
 }) => {
   if (!isVisible) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          &times;
-        </button>
-
-        <h3>Editar Producto</h3>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>&times;</button>
+        <h3>{isEditMode ? "Editar Producto" : "Agregar Producto"}</h3>
 
         <label htmlFor="name">Nombre del producto</label>
         <input
@@ -76,7 +74,7 @@ const ModalEditarProducto = ({
         <select
           id="category_id"
           name="category_id"
-          value={formData.category_id || ''}
+          value={formData.category_id || ""}
           onChange={handleChange}
         >
           <option value="">Seleccione una categoría</option>
@@ -88,14 +86,19 @@ const ModalEditarProducto = ({
         </select>
 
         <label htmlFor="image">Imagen</label>
-        <input id="image" type="file" accept="image/*" onChange={handleImageUpload} />
+        <input
+          id="image"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+        />
         {previewImage && (
           <img src={previewImage} className="preview-image" alt="preview" />
         )}
 
         <div className="modal-buttons">
-          <button className="btn edit" onClick={actualizarProducto}>
-            Actualizar
+          <button className="btn edit" onClick={guardarProducto}>
+            {isEditMode ? "Actualizar" : "Agregar"}
           </button>
           <button className="btn delete" onClick={onClose}>
             Cancelar

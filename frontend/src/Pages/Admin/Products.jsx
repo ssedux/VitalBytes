@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/Admin/Product.css";
 import ModalEditarProducto from "../../components/Modales/Products_Admin";
+import Swal from "sweetalert2";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -33,14 +34,26 @@ const Products = () => {
   }, []);
 
   const eliminarProducto = async (id) => {
-    if (!window.confirm("¿Eliminar este producto?")) return;
-    try {
-      await fetch(`http://localhost:4000/api/products/${id}`, {
-        method: "DELETE"
-      });
-      setProducts(products.filter(prod => prod._id !== id));
-    } catch (error) {
-      console.error("Error eliminando:", error);
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await fetch(`http://localhost:4000/api/products/${id}`, {
+          method: "DELETE"
+        });
+        setProducts(products.filter(prod => prod._id !== id));
+        Swal.fire("Eliminado", "El producto fue eliminado.", "success");
+      } catch (error) {
+        console.error("Error eliminando:", error);
+        Swal.fire("Error", "No se pudo eliminar el producto.", "error");
+      }
     }
   };
 
@@ -87,7 +100,7 @@ const Products = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleImageUpload = (e) => {
@@ -98,33 +111,52 @@ const Products = () => {
         setPreviewImage(reader.result);
       };
       reader.readAsDataURL(file);
-      setFormData({ ...formData, image: file });
+      setFormData(prev => ({ ...prev, image: file }));
     }
   };
 
-  const guardarProducto = async () => {
-    const form = new FormData();
-    form.append("name", formData.name);
-    form.append("description", formData.description);
-    form.append("price", formData.price);
-    form.append("stock", formData.stock);
-    form.append("state", formData.state);
-    form.append("category_id", formData.category_id);
-    if (formData.image instanceof File) {
-      form.append("image", formData.image);
-    }
+  const subirImagenBlog = async (file) => {
+    const formImg = new FormData();
+    formImg.append("image", file);
 
+    const res = await fetch("http://localhost:4000/api/blog/upload-image", {
+      method: "POST",
+      body: formImg,
+    });
+
+    if (!res.ok) throw new Error("Error subiendo imagen");
+
+    const data = await res.json();
+    return data.imageUrl; // Ajusta según lo que te devuelva la API blog
+  };
+
+  const guardarProducto = async () => {
     try {
+      let imageUrl = formData.image;
+
+      if (formData.image instanceof File) {
+        imageUrl = await subirImagenBlog(formData.image);
+      }
+
+      const form = new FormData();
+      form.append("name", formData.name);
+      form.append("description", formData.description);
+      form.append("price", formData.price);
+      form.append("stock", formData.stock);
+      form.append("state", formData.state);
+      form.append("category_id", formData.category_id);
+      form.append("image", imageUrl);
+
       let res;
       if (isEditMode) {
         res = await fetch(`http://localhost:4000/api/products/${formData._id}`, {
           method: "PUT",
-          body: form
+          body: form,
         });
       } else {
         res = await fetch("http://localhost:4000/api/products", {
           method: "POST",
-          body: form
+          body: form,
         });
       }
 
@@ -133,12 +165,16 @@ const Products = () => {
 
       if (isEditMode) {
         setProducts(products.map(p => (p._id === updatedOrNew._id ? updatedOrNew : p)));
+        Swal.fire("Actualizado", "Producto actualizado correctamente", "success");
       } else {
         setProducts([...products, updatedOrNew]);
+        Swal.fire("Agregado", "Producto agregado correctamente", "success");
       }
+
       cerrarModal();
     } catch (error) {
       console.error("Error guardando:", error);
+      Swal.fire("Error", "No se pudo guardar el producto.", "error");
     }
   };
 
@@ -151,23 +187,21 @@ const Products = () => {
       <div className="header-search-container">
         <div className="left-group">
           <h2 className="products-title">Productos</h2>
-
           <input
             type="text"
             placeholder="🔍 Buscar"
             className="products-search"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={e => setSearchTerm(e.target.value)}
           />
         </div>
-
         <button className="btn add" onClick={abrirModalAgregar}>
           Agregar
         </button>
       </div>
 
       <div className="products-grid">
-        {filteredProducts.map((product) => (
+        {filteredProducts.map(product => (
           <div className="product-card" key={product._id}>
             <div className="product-info">
               <img
@@ -183,10 +217,16 @@ const Products = () => {
               </div>
             </div>
             <div className="product-buttons">
-              <button className="btn edit" onClick={() => abrirModalEditar(product)}>
+              <button
+                className="btn edit"
+                onClick={() => abrirModalEditar(product)}
+              >
                 Editar
               </button>
-              <button className="btn delete" onClick={() => eliminarProducto(product._id)}>
+              <button
+                className="btn delete"
+                onClick={() => eliminarProducto(product._id)}
+              >
                 Eliminar
               </button>
             </div>
@@ -201,7 +241,7 @@ const Products = () => {
         handleChange={handleChange}
         handleImageUpload={handleImageUpload}
         previewImage={previewImage}
-        actualizarProducto={guardarProducto}
+        guardarProducto={guardarProducto}
         categories={categories}
         isEditMode={isEditMode}
       />
