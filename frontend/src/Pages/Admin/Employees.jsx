@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import RegisterEmployeeModal from '../../components/Modales/RegisterEmployeeModal.jsx';
-import '../style/Admin/employees.css';
+import '../style/Admin/Employees.css';
 import Title from '../../components/Title.jsx';
 import useDataEmployee from '../../hooks/useDataEmployee.jsx';
 
