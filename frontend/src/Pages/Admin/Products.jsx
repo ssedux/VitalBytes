@@ -45,7 +45,10 @@ const Products = () => {
   };
 
   const abrirModalEditar = (product) => {
-    setFormData(product);
+    setFormData({
+      ...product,
+      category_id: product.category_id?._id || product.category_id || ""
+    });
     setPreviewImage(product.image);
     setIsEditMode(true);
     setShowModal(true);

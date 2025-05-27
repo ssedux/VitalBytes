@@ -22,43 +22,61 @@ const ModalEditarProducto = ({
 
         <h3>Editar Producto</h3>
 
+        <label htmlFor="name">Nombre del producto</label>
         <input
+          id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Nombre"
+          placeholder="Ej: Manzanas"
         />
+
+        <label htmlFor="description">Descripción</label>
         <input
+          id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
-          placeholder="Descripción"
+          placeholder="Ej: Fruta fresca, 1kg"
         />
+
+        <label htmlFor="price">Precio</label>
         <input
+          id="price"
           name="price"
           type="number"
           value={formData.price}
           onChange={handleChange}
-          placeholder="Precio"
+          placeholder="Ej: 25.00"
         />
+
+        <label htmlFor="stock">Stock</label>
         <input
+          id="stock"
           name="stock"
           type="number"
           value={formData.stock}
           onChange={handleChange}
-          placeholder="Stock"
+          placeholder="Ej: 10"
         />
-        <input
+
+        <label htmlFor="state">Estado</label>
+        <select
+          id="state"
           name="state"
           value={formData.state}
           onChange={handleChange}
-          placeholder="Estado"
-        />
+        >
+          <option value="">Seleccione estado</option>
+          <option value="Disponible">Disponible</option>
+          <option value="Agotado">Agotado</option>
+        </select>
 
-        {}
+        <label htmlFor="category_id">Categoría</label>
         <select
+          id="category_id"
           name="category_id"
-          value={formData.category_id}
+          value={formData.category_id || ''}
           onChange={handleChange}
         >
           <option value="">Seleccione una categoría</option>
@@ -69,7 +87,8 @@ const ModalEditarProducto = ({
           ))}
         </select>
 
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <label htmlFor="image">Imagen</label>
+        <input id="image" type="file" accept="image/*" onChange={handleImageUpload} />
         {previewImage && (
           <img src={previewImage} className="preview-image" alt="preview" />
         )}
