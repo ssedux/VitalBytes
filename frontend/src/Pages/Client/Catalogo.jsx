@@ -47,9 +47,9 @@ function Catalogo() {
       return matchesSearch;
     }
 
-    const productCategory = product.category?.name || product.category || '';
-
-    const matchesCategory = selectedCategories.includes(productCategory);
+    // El producto puede tener category_id como string o como objeto
+    const productCategoryId = product.category_id?._id || product.category_id || product.category?._id || product.category;
+    const matchesCategory = selectedCategories.includes(productCategoryId);
 
     return matchesSearch && matchesCategory;
   });
@@ -70,15 +70,16 @@ function Catalogo() {
           {categories.map((category, index) => {
             const label = category.name || category;
             const key = category._id || category.id || index;
+            const value = category._id || category.id || label;
             return (
               <label key={key} className="category-item">
                 <span>{label}</span>
                 <input
                   type="checkbox"
                   name="categories"
-                  value={label}
+                  value={value}
                   onChange={handleCategoryChange}
-                  checked={selectedCategories.includes(label)}
+                  checked={selectedCategories.includes(value)}
                 />
               </label>
             );
