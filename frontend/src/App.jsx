@@ -12,7 +12,7 @@ import Cart from './Pages/Client/Cart.jsx';
 import Users from './Pages/Admin/Users.jsx';
 import Employees from './Pages/Admin/Employees.jsx';
 import Orders from './Pages/Admin/Orders.jsx';
-import Sales from './Pages/Admin/sales.jsx';
+import Sales from './Pages/Admin/Sales.jsx';
 import Products from './Pages/Admin/Products.jsx';
 import Footer from './components/Footer';
 import './App.css';
