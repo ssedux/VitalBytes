@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style/Nav.css';
-import './style/Submenu.css';
+import './style/submenu.css';
 import logo from '../assets/logovitalBytes.webp';
 import SubmenuLog from './submenulog.jsx';
 
