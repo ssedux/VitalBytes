@@ -115,29 +115,8 @@ const Products = () => {
     }
   };
 
-  const subirImagenBlog = async (file) => {
-    const formImg = new FormData();
-    formImg.append("image", file);
-
-    const res = await fetch("http://localhost:4000/api/blog/upload-image", {
-      method: "POST",
-      body: formImg,
-    });
-
-    if (!res.ok) throw new Error("Error subiendo imagen");
-
-    const data = await res.json();
-    return data.imageUrl; // Ajusta según lo que te devuelva la API blog
-  };
-
   const guardarProducto = async () => {
     try {
-      let imageUrl = formData.image;
-
-      if (formData.image instanceof File) {
-        imageUrl = await subirImagenBlog(formData.image);
-      }
-
       const form = new FormData();
       form.append("name", formData.name);
       form.append("description", formData.description);
@@ -145,7 +124,12 @@ const Products = () => {
       form.append("stock", formData.stock);
       form.append("state", formData.state);
       form.append("category_id", formData.category_id);
-      form.append("image", imageUrl);
+      // Si la imagen es un File, la subimos, si es string (url existente), la pasamos como string
+      if (formData.image instanceof File) {
+        form.append("image", formData.image);
+      } else if (typeof formData.image === "string" && formData.image) {
+        form.append("image", formData.image);
+      }
 
       let res;
       if (isEditMode) {
