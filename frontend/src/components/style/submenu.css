@@ -35,9 +35,9 @@ hr{
 
 
 .submenu{
-    position: fixed; /* Fija el submenu respecto a la ventana, no al contenedor */
-    top: 75px;
-    right: 1px; /* Ajusta para que quede alineado igual en ambas vistas */
+    position: absolute; /* Cambiado a absolute para superponerse al contenido */
+    top: 100%; /* Justo debajo del navbar si el padre es relative */
+    right: 1px;
     color: #914F1E;
     max-height:     0px;
     overflow: hidden;
@@ -89,8 +89,8 @@ width: 100%;
 @media (max-width: 600px) {
     .submenu {
         position: absolute;
-        top: 100%; /* Justo debajo del botón Mi Perfil */
-        left: 0; /* Pegado a la izquierda */
+        top: 100%;
+        left: 0;
         right: auto;
         margin: 0;
         min-width: 210px;
