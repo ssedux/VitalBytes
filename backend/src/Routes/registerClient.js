@@ -1,5 +1,5 @@
 import express from "express";
-import registerClientController from "../controllers/registerClientController.js";
+import registerClientController from "../Controllers/registerClientController.js";
 
 const router = express.Router();
 
