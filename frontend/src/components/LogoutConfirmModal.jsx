@@ -1,5 +1,5 @@
 import React from "react";
-import "./style/Submenu.css";
+import "./style/submenu.css";
 
 const LogoutConfirmModal = ({ isOpen, onConfirm, onCancel }) => {
   if (!isOpen) return null;
