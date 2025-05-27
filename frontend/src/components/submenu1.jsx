@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style/Submenu.css';
+import './style/submenu.css';
 import LogModal from './Modales/logModal.jsx';
 import RegisterModal from './Modales/RegisterModal.jsx';
 
