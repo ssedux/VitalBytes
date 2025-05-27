@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style/submenu.css';
-import LogModal from './Modales/logModal.jsx';
+import LogModal from './Modales/LogModal.jsx';
 import RegisterModal from './Modales/RegisterModal.jsx';
 
 const Submenu1 = () => {
