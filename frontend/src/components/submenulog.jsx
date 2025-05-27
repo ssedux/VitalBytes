@@ -1,5 +1,5 @@
 import React from 'react';
-import './style/Submenu.css';
+import './style/submenu.css';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import LogoutConfirmModal from './LogoutConfirmModal.jsx';
