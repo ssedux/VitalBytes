@@ -3,69 +3,30 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import RegisterEmployeeModal from '../../components/Modales/RegisterEmployeeModal.jsx';
 import '../style/Admin/employees.css';
+import Title from '../../components/Title.jsx';
+import useDataEmployee from '../../hooks/useDataEmployee.jsx';
 
 const Employees = () => {
-  const [showRegister, setShowRegister] = useState(false);
-  const [empleados, setEmpleados] = useState([]);
-  const [empleadoEdit, setEmpleadoEdit] = useState(null);
 
-  // Función para obtener empleados
-  const fetchEmployees = async () => {
-    try {
-      const res = await axios.get('http://localhost:4000/api/employee');
-      console.log("Empleados obtenidos:", res.data);
-      setEmpleados(res.data);
-    } catch (err) {
-      console.error("Error al obtener empleados:", err);
-    }
-  };
+  const {    showRegister,
+    setShowRegister,
+    empleados,
 
-  // Función para eliminar empleado con confirmación
-  const eliminarEmpleado = async (id) => {
-    const result = await Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¡Esta acción eliminará al empleado!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
-    });
+    empleadoEdit,
+    setEmpleadoEdit,
 
-    if (result.isConfirmed) {
-      try {
-        await axios.delete(`http://localhost:4000/api/employee/${id}`);
-        Swal.fire('¡Eliminado!', 'El empleado ha sido eliminado.', 'success');
-        fetchEmployees();
-      } catch (err) {
-        console.error("Error al eliminar empleado:", err);
-        Swal.fire('Error', 'No se pudo eliminar el empleado.', 'error');
-      }
-    }
-  };
-
-  // Cierra el modal y limpia estado
-  const handleCloseModal = () => {
-    console.log("Modal cerrado");
-    setShowRegister(false);
-    setEmpleadoEdit(null);
-  };
-
-  // Actualiza la lista y cierra modal tras éxito (crear o actualizar)
-  const handleSuccess = () => {
-    console.log("handleSuccess llamado: recargando lista y cerrando modal");
-    fetchEmployees();
-    handleCloseModal();
-  };
-
-  useEffect(() => {
-    fetchEmployees();
-  }, []);
+    eliminarEmpleado,
+    handleCloseModal,
+    handleSuccess } = useDataEmployee();
+ 
 
   return (
     <div className="employees-container">
       <div className="header-container">
         <div className="header-info">
-          <h1 className="txth1">Empleados</h1>
+             <Title
+          texto="Empleados"
+          />
           <p className="txt">Administra aquí los empleados de la empresa.</p>
         </div>
         <button

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../style/Admin/Product.css";
 import ModalEditarProducto from "../../components/Modales/Products_Admin";
 import Swal from "sweetalert2";
+import Title from "../../components/Title";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -170,7 +171,10 @@ const Products = () => {
     <div className="products-container">
       <div className="header-search-container">
         <div className="left-group">
-          <h2 className="products-title">Productos</h2>
+          <Title
+          texto="Productos"
+          />
+        
           <input
             type="text"
             placeholder="🔍 Buscar"
